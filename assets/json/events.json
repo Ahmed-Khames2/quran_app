@@ -1,0 +1,67 @@
+[
+  {
+    "title": "رأس السنة الهجرية",
+    "hijri_day": 1,
+    "hijri_month": 1
+  },
+  {
+    "title": "عاشوراء",
+    "hijri_day": 10,
+    "hijri_month": 1
+  },
+  {
+    "title": "اليوم الوطني المصري",
+    "gregorian_day": 23,
+    "gregorian_month": 7
+  },
+  {
+    "title": "المولد النبوي",
+    "hijri_day": 12,
+    "hijri_month": 3
+  },
+  {
+    "title": "الإسراء والمعراج",
+    "hijri_day": 27,
+    "hijri_month": 7
+  },
+  {
+    "title": "رمضان",
+    "hijri_day": 1,
+    "hijri_month": 9
+  },
+  {
+    "title": "ليلة القدر",
+    "hijri_day": 27,
+    "hijri_month": 9
+  },
+  {
+    "title": "عيد الفطر",
+    "hijri_day": 1,
+    "hijri_month": 10
+  },
+  {
+    "title": "ذكرى تحرير سيناء",
+    "gregorian_day": 25,
+    "gregorian_month": 4
+  },
+  {
+    "title": "عيد العمال",
+    "gregorian_day": 1,
+    "gregorian_month": 5
+  },
+  {
+    "title": "الحج",
+    "hijri_day": 8,
+    "hijri_month": 12
+  },
+  {
+    "title": "يوم عرفة",
+    "hijri_day": 9,
+    "hijri_month": 12
+  },
+  {
+    "title": "عيد الأضحى",
+    "hijri_day": 10,
+    "hijri_month": 12
+  }
+]
