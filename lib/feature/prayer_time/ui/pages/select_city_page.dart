@@ -31,16 +31,30 @@ class _SelectCityPageState extends State<SelectCityPage> {
     final isConfirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('تأكيد تغيير المدينة'),
-        content: Text('هل أنت متأكد أنك تريد تغيير المدينة إلى ${city.name}?'),
+        title: Text(
+          'تأكيد تغيير المدينة',
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        content: Text(
+          'هل أنت متأكد أنك تريد تغيير المدينة إلى ${city.name}؟',
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('إلغاء'),
+            child: Text(
+              'إلغاء',
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+            ),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('تأكيد'),
+            child: Text(
+              'تأكيد',
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            ),
           ),
         ],
       ),
@@ -53,19 +67,37 @@ class _SelectCityPageState extends State<SelectCityPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      appBar: AppBar(title: const Text("اختر المدينة")),
+      appBar: AppBar(
+        title: Text(
+          "اختر المدينة",
+          style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+        ),
+      ),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(
+              child: CircularProgressIndicator(
+                color: theme.colorScheme.primary,
+              ),
+            )
           : ListView.builder(
               itemCount: cities.length,
               itemBuilder: (context, index) {
                 final city = cities[index];
-                return ListTile(
-                  title: Text(city.name),
-                  onTap: () {
-                    _showConfirmDialog(city); // Call the confirmation dialog
-                  },
+                return Card(
+                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ListTile(
+                    title: Text(
+                      city.name,
+                      style: theme.textTheme.bodyLarge,
+                    ),
+                    onTap: () => _showConfirmDialog(city),
+                  ),
                 );
               },
             ),

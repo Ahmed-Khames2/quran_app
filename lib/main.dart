@@ -5,9 +5,11 @@ import 'package:intl/date_symbol_data_file.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theam_mood_with_block/core/theme/bloc/theme_bloc.dart';
 import 'package:theam_mood_with_block/cubitss/azkar_cubit/favorite_cubit.dart';
+import 'package:theam_mood_with_block/cubitss/prayer_cubit/prayer_cubit.dart';
 import 'package:theam_mood_with_block/cubitss/tasbeeh_cubit/tasbeeh_cubit.dart';
 import 'package:theam_mood_with_block/core/theme/app_theme.dart';
 import 'package:theam_mood_with_block/feature/calender/pages/calenderpage.dart';
+import 'package:theam_mood_with_block/feature/prayer_time/ui/pages/home_screen.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/ui/pages/prayer_time_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tzData;
@@ -26,14 +28,15 @@ void main() async {
 
   // طلب إذن الإشعارات
   await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
       ?.requestNotificationsPermission();
 
   // إعداد الإشعارات
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('app_icon');
 
-  final InitializationSettings initializationSettings = InitializationSettings(
+  const InitializationSettings initializationSettings = InitializationSettings(
     android: initializationSettingsAndroid,
   );
 
@@ -42,6 +45,7 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   runApp(MyApp(prefs: prefs));
 }
+
 class MyApp extends StatelessWidget {
   final SharedPreferences prefs;
 
@@ -54,6 +58,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ThemeBloc()..add(GetCuurrentThemeEvent())),
         BlocProvider(create: (context) => TasbeehCubit()),
         BlocProvider(create: (context) => FavoriteCubit(prefs: prefs)),
+        BlocProvider(create: (context) => PrayerCubit()..loadSelectedCity()), // ✅ أضفنا ده
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
@@ -65,13 +70,13 @@ class MyApp extends StatelessWidget {
                 Locale('ar', 'EG'),
                 Locale('en', 'US'),
               ],
-              localizationsDelegates: [
+              localizationsDelegates: const [
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
               theme: appThemeData[state.appTheme]!,
-              home: IslamicCalendarPage(),
+              home: PrayerTimeScreen(),
             );
           } else {
             return const SizedBox();

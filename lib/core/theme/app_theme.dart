@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 /// تعداد الثيمات المتاحة في التطبيق مع أسماء وصفية.
 enum AppTheme {
-  // blueLight("Blue Light"),
-  // redDark("Red Dark");
   islamicLight("Islamic Light"),
   islamicDark("Islamic Dark");
 
@@ -22,13 +20,22 @@ final appThemeData = {
       foregroundColor: Colors.white,
     ),
     textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Color(0xFF212121)),
+      bodyLarge: TextStyle(
+        fontSize: 16.0, 
+        color: Color(0xFF212121),
+        fontWeight: FontWeight.normal,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 14.0, 
+        color: Color(0xFF757575),
+        fontWeight: FontWeight.normal,
+      ),
       titleLarge: TextStyle(color: Color(0xFF006754)),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color(0xFF87D1A4),
-        foregroundColor: Colors.white,
+        backgroundColor: Color(0xFF87D1A4), 
+        foregroundColor: Colors.white, 
       ),
     ),
     cardColor: Colors.white,
@@ -43,7 +50,16 @@ final appThemeData = {
       foregroundColor: Colors.white,
     ),
     textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Colors.white),
+      bodyLarge: TextStyle(
+        fontSize: 16.0,
+        color: Colors.white,
+        fontWeight: FontWeight.normal,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 14.0,
+        color: Colors.white70,
+        fontWeight: FontWeight.normal,
+      ),
       titleLarge: TextStyle(color: Color(0xFF4ECDC4)),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(

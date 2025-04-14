@@ -1,205 +1,168 @@
-import 'dart:io';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:theam_mood_with_block/feature/prayer_time/models/city_model.dart';
-import 'package:theam_mood_with_block/feature/prayer_time/services/prayer_time_service.dart';
-import 'package:theam_mood_with_block/feature/prayer_time/ui/pages/select_city_page.dart';
-import 'package:adhan/adhan.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/timezone.dart' as tz;
-import 'package:theam_mood_with_block/main.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:android_intent_plus/android_intent.dart';
-import 'package:android_intent_plus/flag.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:intl/intl.dart'; // Import intl package
+import 'package:theam_mood_with_block/cubitss/prayer_cubit/prayer_cubit.dart';
+import 'package:theam_mood_with_block/cubitss/prayer_cubit/prayer_stare.dart';
+import 'package:theam_mood_with_block/feature/Azkaritem/pages/azkaritempage.dart';
+import 'package:theam_mood_with_block/feature/calender/pages/calenderpage.dart';
+import 'package:theam_mood_with_block/feature/names_of_allah/pages/names_page.dart';
+import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/FeatureTile.dart';
+import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/QuranCard.dart';
+import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/prayer_icon.dart';
+import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/prayer_time_card.dart';
+import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/app_bae_widget.dart';
+import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/sallah_ala_mohamed.dart';
+import 'package:theam_mood_with_block/feature/quran/pages/quran_home.dart';
+import 'package:theam_mood_with_block/feature/ziker/pages/homepage.dart';
 
-class PrayerTimeScreen extends StatefulWidget {
-  @override
-  _PrayerTimeScreenState createState() => _PrayerTimeScreenState();
-}
-
-class _PrayerTimeScreenState extends State<PrayerTimeScreen> {
-  late PrayerTimeService prayerTimeService;
-  PrayerTimes? prayerTimes;
-  late Coordinates coordinates;
-  CityModel? selectedCity;
-
-  @override
-  void initState() {
-    super.initState();
-    _checkExactAlarmPermission();
-    _loadSelectedCity(); // Load the selected city when the screen is initialized
-  }
-
-  Future<void> _checkExactAlarmPermission() async {
-    if (Platform.isAndroid && (await Permission.scheduleExactAlarm.isDenied)) {
-      final intent = AndroidIntent(
-        action: 'android.settings.REQUEST_SCHEDULE_EXACT_ALARM',
-        flags: <int>[Flag.FLAG_ACTIVITY_NEW_TASK],
-      );
-      await intent.launch();
-    }
-  }
-
-  Future<void> _loadSelectedCity() async {
-    final prefs = await SharedPreferences.getInstance();
-    final cityName = prefs.getString('selectedCity');
-    final cityLat = prefs.getDouble('cityLat');
-    final cityLng = prefs.getDouble('cityLng');
-
-    if (cityName != null && cityLat != null && cityLng != null) {
-      setState(() {
-        selectedCity = CityModel(name: cityName, lat: cityLat, lng: cityLng);
-        coordinates = Coordinates(cityLat, cityLng);
-        _loadPrayerTimes(); // Load prayer times after setting the city and coordinates
-      });
-    } else {
-      // Default to Cairo if no city is selected
-      setState(() {
-        selectedCity = CityModel(name: "Cairo", lat: 31.2001, lng: 29.9187);
-        coordinates = Coordinates(31.2001, 29.9187); // Cairo as default
-        _loadPrayerTimes();
-      });
-    }
-  }
-
-  Future<void> _saveSelectedCity(CityModel city) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedCity', city.name);
-    await prefs.setDouble('cityLat', city.lat);
-    await prefs.setDouble('cityLng', city.lng);
-  }
-
-  void _loadPrayerTimes() async {
-    prayerTimeService = PrayerTimeService(coordinates);
-    final now = DateTime.now();
-    try {
-      prayerTimes = prayerTimeService.getPrayerTimes(now);
-      _schedulePrayerTimes();
-    } catch (e) {
-      print('Error loading prayer times: $e');
-    }
-  }
-
-  void _schedulePrayerTimes() async {
-    if (prayerTimes != null) {
-      await _scheduleNotification(prayerTimes!.fajr, 'صلاة الفجر', 1);
-      await _scheduleNotification(prayerTimes!.dhuhr, 'صلاة الظهر', 2);
-      await _scheduleNotification(prayerTimes!.asr, 'صلاة العصر', 3);
-      await _scheduleNotification(prayerTimes!.maghrib, 'صلاة المغرب', 4);
-      await _scheduleNotification(prayerTimes!.isha, 'صلاة العشاء', 5);
-    }
-  }
-
-  Future<void> _scheduleNotification(
-      DateTime prayerTime, String prayerName, int id) async {
-    final scheduledTime = _nextInstanceOfTime(prayerTime);
-
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      id,
-      'وقت الصلاة',
-      prayerName,
-      scheduledTime,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'prayer_channel',
-          'Prayer Notifications',
-          channelDescription: 'تنبيهات لأوقات الصلاة',
-          importance: Importance.max,
-          priority: Priority.high,
-        ),
-      ),
-      matchDateTimeComponents: DateTimeComponents.time,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-    );
-  }
-
-  tz.TZDateTime _nextInstanceOfTime(DateTime prayerTime) {
-    final now = tz.TZDateTime.now(tz.local);
-    var scheduledDate = tz.TZDateTime(
-      tz.local,
-      now.year,
-      now.month,
-      now.day,
-      prayerTime.hour,
-      prayerTime.minute,
-    );
-    if (scheduledDate.isBefore(now)) {
-      scheduledDate = scheduledDate.add(const Duration(days: 1));
-    }
-    return scheduledDate;
-  }
-
-  Future<void> _selectCity() async {
-    final city = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const SelectCityPage()),
-    );
-
-    if (city != null) {
-      setState(() {
-        selectedCity = city;
-        coordinates = Coordinates(city.lat, city.lng);
-        _saveSelectedCity(city); // Save the selected city
-        _loadPrayerTimes(); // Reload prayer times with the new city
-      });
-    }
-  }
-
-  // Format time to "HH:mm"
-  String formatTime(DateTime time) {
-    final DateFormat formatter = DateFormat('HH:mm');
-    return formatter.format(time);
-  }
-
+class PrayerTimeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('مواقيت الصلاة'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.location_on),
-            onPressed: _selectCity,
-          ),
-        ],
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: AppBarWidget(
+          cityName: context.watch<PrayerCubit>().state.selectedCity?.name ?? '',
+          onSelectCity: () {
+            // فتح صفحة اختيار المدينة
+          },
+        ),
       ),
-      body: prayerTimes == null
-          ? const Center(child: CircularProgressIndicator())
-          : ListView(
-              children: [
-                if (selectedCity != null)
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'المدينة: ${selectedCity!.name}',
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
+      body: BlocBuilder<PrayerCubit, PrayerState>(
+        builder: (context, state) {
+          if (state.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          return ListView(
+            padding: const EdgeInsets.all(16.0),
+            children: [
+              SallahAlaMohamed(theme: theme),
+              const SizedBox(height: 24.0),
+
+              // عنوان مواقيت الصلاة
+              Text(
+                'مواقيت الصلاة',
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16.0),
+
+              // بطاقات الصلاة
+              PrayerTimeCard(
+                title: 'الفجر',
+                time: state.prayerTimes!.fajr,
+                icon: getPrayerIcon('الفجر'),
+              ),
+              const SizedBox(height: 12.0),
+              PrayerTimeCard(
+                title: 'الظهر',
+                time: state.prayerTimes!.dhuhr,
+                icon: getPrayerIcon('الظهر'),
+              ),
+              const SizedBox(height: 12.0),
+              PrayerTimeCard(
+                title: 'العصر',
+                time: state.prayerTimes!.asr,
+                icon: getPrayerIcon('العصر'),
+              ),
+              const SizedBox(height: 12.0),
+              PrayerTimeCard(
+                title: 'المغرب',
+                time: state.prayerTimes!.maghrib,
+                icon: getPrayerIcon('المغرب'),
+              ),
+              const SizedBox(height: 12.0),
+              PrayerTimeCard(
+                title: 'العشاء',
+                time: state.prayerTimes!.isha,
+                icon: getPrayerIcon('العشاء'),
+              ),
+
+              const SizedBox(height: 24.0),
+              const Divider(
+                thickness: 1.5,
+                indent: 30,
+                endIndent: 30,
+              ),
+              const SizedBox(height: 24.0),
+
+              // القرآن
+              Center(
+                child: Text(
+                  'اقرأ وردك اليومي',
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
                   ),
-                ListTile(
-                  title: const Text('الفجر'),
-                  subtitle: Text(formatTime(prayerTimes!.fajr)),
                 ),
-                ListTile(
-                  title: const Text('الظهر'),
-                  subtitle: Text(formatTime(prayerTimes!.dhuhr)),
+              ),
+              const SizedBox(height: 12.0),
+              QuranCard(onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const QuranHome()));
+              }),
+
+              const SizedBox(height: 24.0),
+
+              // المميزات
+              Text(
+                'مميزات إضافية',
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
                 ),
-                ListTile(
-                  title: const Text('العصر'),
-                  subtitle: Text(formatTime(prayerTimes!.asr)),
-                ),
-                ListTile(
-                  title: const Text('المغرب'),
-                  subtitle: Text(formatTime(prayerTimes!.maghrib)),
-                ),
-                ListTile(
-                  title: const Text('العشاء'),
-                  subtitle: Text(formatTime(prayerTimes!.isha)),
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 12.0),
+              Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 20,
+                runSpacing: 16,
+                children: [
+                  FeatureTile(
+                    icon: Icons.fingerprint,
+                    label: "التسبيح",
+                    onTap: () {
+                      Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const DhikrPage()));
+  
+                    },
+                  ),
+                  FeatureTile(
+                    icon: Icons.auto_stories,
+                    label: "الأذكار",
+                    onTap: () {
+                      Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AzkarHomePage()));
+  
+                    },
+                  ),
+                  FeatureTile(
+                    icon: Icons.calendar_month,
+                    label: "التقويم",
+                    onTap: () {
+                      Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const IslamicCalendarPage()));
+  
+                    },
+                  ),
+                  FeatureTile(
+                    icon: Icons.star,
+                    label: "أسماء الله",
+                    onTap: () {
+                      Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const NamesOfAllahPage()));
+  
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 32),
+            ],
+          );
+        },
+      ),
     );
   }
 }
