@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
                 GlobalCupertinoLocalizations.delegate,
               ],
               theme: appThemeData[state.appTheme]!,
-              home: CalendarPage(),
+              home: IslamicCalendarPage(),
             );
           } else {
             return const SizedBox();
