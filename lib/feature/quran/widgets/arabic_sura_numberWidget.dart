@@ -8,7 +8,7 @@ class ArabicSuraNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      "\uFD3E${(i + 1).toString().toArabicNumbers}\uFD3F",
+      "\uFD3F${(i + 1).toString().toArabicNumbers}\uFD3E",
       style: TextStyle(
         color: Theme.of(context).textTheme.bodyLarge?.color,
         fontFamily: 'me_quran',

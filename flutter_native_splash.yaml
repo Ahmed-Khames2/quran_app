@@ -1,0 +1,15 @@
+flutter_native_splash:
+  image: assets/icon/moon.png  # الشعار الرئيسي
+  color: "#1A3C40 "  # الخلفية في الوضع الفاتح
+  android_12:
+    image: assets/icon/moon.png  # الشعار لنظام Android 12
+    color: "#1A3C40 "  # نفس اللون للخلفية في Android 12
+  # ios:
+  #   image: assets/icon/app_iconc.png  # الشعار في iOS
+  #   color: "#F9F9F9"  # الخلفية في iOS
+  # splash_screen: 
+  #   image: assets/icon/app_icon.png  # الصورة التي تحتوي على السلوغن
+  #   color: "#F9F9F9"  # خلفية splash screen في الوضع الفاتح
+
+
+# dart run flutter_native_splash:create --path=flutter_native_splash.yaml

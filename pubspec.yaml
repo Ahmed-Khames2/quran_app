@@ -60,6 +60,12 @@ dependencies:
   permission_handler: ^12.0.0+1
   table_calendar: ^3.1.3
   hijri: ^3.0.0
+  colorful_iconify_flutter: ^0.0.5
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/WhatsApp Image 2025-04-15 at 06.32.23_07a71dd0.jpg" 
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +94,8 @@ flutter:
     - assets/json/
     - assets/json/hafs_smart_v8.json
     - assets/json/ar_EG.json
+    - assets/icon/
+    - assets/fonts/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -102,6 +110,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    - family: quran
+      fonts:
+        - asset: assets/fonts/HafsSmart_08.ttf
     - family: me_quran
       fonts:
         - asset: assets/fonts/me_quran.ttf
@@ -110,6 +121,11 @@ flutter:
     - family: quran_smart
       fonts:
         - asset: assets/fonts/46-Diwani-Bent.ttf
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo-Regular.ttf
+        - asset: assets/fonts/Cairo-Bold.ttf
+          weight: 700
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

@@ -33,14 +33,18 @@ class PrayerTimeCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(icon, color: theme.primaryColor), // استخدم اللون الرئيسي من الثيم
+              Icon(icon,
+                  color:
+                      theme.iconTheme.color), // استخدم اللون الرئيسي من الثيم
               const SizedBox(width: 8),
               Text(
                 title,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 22,
                   fontWeight: FontWeight.w600,
-                  color: theme.textTheme.bodyLarge?.color, // استخدم اللون النص من الثيم
+                  fontFamily: 'me_quran',
+                  color: theme
+                      .textTheme.bodyLarge?.color, // استخدم اللون النص من الثيم
                 ),
               ),
             ],
@@ -49,7 +53,8 @@ class PrayerTimeCard extends StatelessWidget {
             '${formatTime(time)} - ${timeOfDay(time)}',
             style: TextStyle(
               fontSize: 16,
-              color: theme.textTheme.bodyMedium?.color, // استخدم لون النص من الثيم
+              color:
+                  theme.textTheme.bodyMedium?.color, // استخدم لون النص من الثيم
             ),
           ),
         ],

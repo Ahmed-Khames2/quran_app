@@ -46,13 +46,18 @@ class _NamesOfAllahPageState extends State<NamesOfAllahPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'أسماء الله الحسنى',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            // fontFamily: 'me_quran',
+          ),
           // style: theme.textTheme.titleLarge?.copyWith(
           //   fontWeight: FontWeight.bold,
           // ),
         ),
-        centerTitle: true,
+        // centerTitle: true,
         elevation: sqrt1_2,
       ),
       body: isLoading
@@ -133,7 +138,7 @@ class _NamesOfAllahPageState extends State<NamesOfAllahPage> {
                                       ?.withOpacity(0.7),
                                 ),
                                 textAlign: TextAlign.right,
-                                textDirection: TextDirection.rtl,
+                                // textDirection: TextDirection.rtl,
                                 textScaleFactor: 1.2,
                               ),
                             ],

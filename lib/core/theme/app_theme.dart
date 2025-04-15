@@ -39,6 +39,9 @@ final appThemeData = {
       ),
     ),
     cardColor: Colors.white,
+    iconTheme: const IconThemeData(
+      color: Color(0xFF006754), // لون الأيقونات
+    ),
   ),
 
   AppTheme.islamicDark: ThemeData(
@@ -69,5 +72,8 @@ final appThemeData = {
       ),
     ),
     cardColor: const Color(0xFF1E1E1E),
+    iconTheme: const IconThemeData(
+      color: Color.fromARGB(255, 226, 219, 136), // لون الأيقونات في الوضع الداكن
+    ),
   ),
 };

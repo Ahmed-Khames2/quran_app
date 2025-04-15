@@ -7,6 +7,7 @@ import 'package:theam_mood_with_block/feature/calender/pages/calenderpage.dart';
 import 'package:theam_mood_with_block/feature/names_of_allah/pages/names_page.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/FeatureTile.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/QuranCard.dart';
+import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/mydrawerWidgets.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/prayer_icon.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/prayer_time_card.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/app_bae_widget.dart';
@@ -29,6 +30,7 @@ class PrayerTimeScreen extends StatelessWidget {
           },
         ),
       ),
+      drawer: MyDrawer(),
       body: BlocBuilder<PrayerCubit, PrayerState>(
         builder: (context, state) {
           if (state.isLoading) {
@@ -46,6 +48,7 @@ class PrayerTimeScreen extends StatelessWidget {
                 'مواقيت الصلاة',
                 style: theme.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'me_quran',
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -88,7 +91,7 @@ class PrayerTimeScreen extends StatelessWidget {
                 indent: 30,
                 endIndent: 30,
               ),
-              const SizedBox(height: 24.0),
+              const SizedBox(height: 18.0),
 
               // القرآن
               Center(
@@ -96,6 +99,7 @@ class PrayerTimeScreen extends StatelessWidget {
                   'اقرأ وردك اليومي',
                   style: theme.textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'me_quran',
                   ),
                 ),
               ),
@@ -112,6 +116,7 @@ class PrayerTimeScreen extends StatelessWidget {
                 'مميزات إضافية',
                 style: theme.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'me_quran',
                 ),
               ),
               const SizedBox(height: 12.0),
@@ -124,36 +129,41 @@ class PrayerTimeScreen extends StatelessWidget {
                     icon: Icons.fingerprint,
                     label: "التسبيح",
                     onTap: () {
-                      Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const DhikrPage()));
-  
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const DhikrPage()));
                     },
                   ),
                   FeatureTile(
                     icon: Icons.auto_stories,
                     label: "الأذكار",
                     onTap: () {
-                      Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AzkarHomePage()));
-  
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AzkarHomePage()));
                     },
                   ),
                   FeatureTile(
                     icon: Icons.calendar_month,
                     label: "التقويم",
                     onTap: () {
-                      Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const IslamicCalendarPage()));
-  
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const IslamicCalendarPage()));
                     },
                   ),
                   FeatureTile(
                     icon: Icons.star,
                     label: "أسماء الله",
                     onTap: () {
-                      Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const NamesOfAllahPage()));
-  
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NamesOfAllahPage()));
                     },
                   ),
                 ],

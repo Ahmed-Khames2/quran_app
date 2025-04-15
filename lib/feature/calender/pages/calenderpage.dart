@@ -73,6 +73,10 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final primaryColor = theme.primaryColor;
+    final selectedColor = theme.elevatedButtonTheme.style?.backgroundColor?.resolve({}) ?? primaryColor;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('التقويم والمناسبات الإسلامية'),
@@ -110,12 +114,18 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
                   children: [
                     Text(
                       '${day.day}',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: theme.textTheme.bodyLarge?.color,
+                      ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       '${hijri.hDay}ه‍',
-                      style: const TextStyle(fontSize: 10, color: Colors.grey),
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: theme.textTheme.bodyMedium?.color,
+                      ),
                     ),
                   ],
                 );
@@ -123,8 +133,8 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
               todayBuilder: (context, day, focusedDay) {
                 final hijri = HijriCalendar.fromDate(day);
                 return Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.teal,
+                  decoration: BoxDecoration(
+                    color: primaryColor,
                     shape: BoxShape.circle,
                   ),
                   alignment: Alignment.center,
@@ -138,7 +148,9 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
                       Text(
                         '${hijri.hDay}',
                         style: const TextStyle(
-                            fontSize: 10, color: Colors.white70),
+                          fontSize: 10,
+                          color: Colors.white70,
+                        ),
                       ),
                     ],
                   ),
@@ -147,8 +159,8 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
               selectedBuilder: (context, day, focusedDay) {
                 final hijri = HijriCalendar.fromDate(day);
                 return Container(
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 0, 145, 150),
+                  decoration: BoxDecoration(
+                    color: selectedColor,
                     shape: BoxShape.circle,
                   ),
                   alignment: Alignment.center,
@@ -162,7 +174,9 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
                       Text(
                         '${hijri.hDay}',
                         style: const TextStyle(
-                            fontSize: 10, color: Colors.white70),
+                          fontSize: 10,
+                          color: Colors.white70,
+                        ),
                       ),
                     ],
                   ),
@@ -176,8 +190,8 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
                     child: Container(
                       width: 6,
                       height: 6,
-                      decoration: const BoxDecoration(
-                        color: Colors.red,
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.secondary,
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -195,7 +209,7 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
                     itemCount: _getEventsForDay(_selectedDay!).length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        leading: const Icon(Icons.event),
+                        leading: Icon(Icons.event, color: primaryColor),
                         title: Text(_getEventsForDay(_selectedDay!)[index]),
                       );
                     },

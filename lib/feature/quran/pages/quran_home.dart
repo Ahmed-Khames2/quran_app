@@ -14,71 +14,47 @@ class _QuranHomeState extends State<QuranHome> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context); // نجيب الثيم الحالي
-    // final theme = Theme.of(context);
-    // final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'اذهب للعلامة',
-        backgroundColor: theme.primaryColor, // من الثيم
-        onPressed: () async {
-          fabIsClicked = true;
-          if (await readBookmark() == true) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SurahBuilder(
-                  arabic: quran[0],
-                  sura: bookmarkedSura - 1,
-                  suraName: arabicName[bookmarkedSura - 1]['name'],
-                  ayah: bookmarkedAyah,
-                ),
-              ),
-            );
-          }
-        },
-        child: const Icon(
-          Icons.bookmark,
-          // color: theme.colorScheme.onPrimary,
-          color: Colors.white,
-        ),
-      ),
       appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Quran",
-            // style: theme.textTheme.titleLarge?.copyWith(
-            //   fontSize: 32,
-            //   fontWeight: FontWeight.bold,
-            //   shadows: const [
-            //     Shadow(
-            //       offset: Offset(1, 1),
-            //       blurRadius: 2.0,
-            //       color: Colors.black26,
-            //     ),
-            //   ],
-            // ),
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              shadows: [
-                Shadow(
-                  offset: Offset(1, 1),
-                  blurRadius: 2.0,
-                  color: Colors.black26,
-                ),
-              ],
-            )),
+        title: Text(
+          "القرآن الكريم",
+          style: theme.textTheme.titleLarge?.copyWith(
+            fontSize: 26,
+            fontWeight: FontWeight.bold,
+            shadows: const [
+              Shadow(
+                offset: Offset(1, 1),
+                blurRadius: 2.0,
+                color: Colors.black26,
+              ),
+            ],
+          ),
+        ),
       ),
       body: FutureBuilder(
         future: readJson(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(
+              child: CircularProgressIndicator(
+                color: theme.primaryColor,
+              ),
+            );
           } else if (snapshot.hasError) {
-            print('Error: ${snapshot.error}');
-            return const Center(child: Text('حدث خطأ'));
+            return Center(
+              child: Text(
+                'حدث خطأ',
+                style: theme.textTheme.bodyLarge,
+              ),
+            );
           } else if (!snapshot.hasData) {
-            return const Center(child: Text('لا توجد بيانات'));
+            return Center(
+              child: Text(
+                'لا توجد بيانات',
+                style: theme.textTheme.bodyLarge,
+              ),
+            );
           } else {
             return indexCreator(snapshot.data, context);
           }
@@ -114,34 +90,31 @@ class _QuranHomeState extends State<QuranHome> {
                   ),
                 );
               },
+              style: TextButton.styleFrom(
+                splashFactory: InkRipple.splashFactory,
+                backgroundColor: Colors.transparent,
+              ),
               child: Row(
                 children: [
+                  Expanded(
+                    child: Text(
+                      arabicName[i]['name'],
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontFamily: 'me_quran',
+                        color: theme.textTheme.bodyLarge?.color,
+                        shadows: const [
+                          Shadow(
+                            offset: Offset(.5, .5),
+                            blurRadius: 1.0,
+                            color: Color.fromARGB(255, 130, 130, 130),
+                          ),
+                        ],
+                      ),
+                      textDirection: TextDirection.rtl,
+                    ),
+                  ),
                   ArabicSuraNumber(i: i),
-                  const SizedBox(width: 5),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [],
-                    ),
-                  ),
-                  const Expanded(child: SizedBox()),
-                  Text(
-                    arabicName[i]['name'],
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: 'quran',
-                      color: theme.textTheme.bodyLarge?.color,
-                      shadows: const [
-                        Shadow(
-                          offset: Offset(.5, .5),
-                          blurRadius: 1.0,
-                          color: Color.fromARGB(255, 130, 130, 130),
-                        ),
-                      ],
-                    ),
-                    textDirection: TextDirection.rtl,
-                  ),
                 ],
               ),
             ),

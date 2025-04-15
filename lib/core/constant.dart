@@ -311,7 +311,6 @@ class AppLightColors {
   static const Color button = Color(0xFF87D1A4);
 }
 
-/// ألوان Dark Mode الخاصة بالتطبيق الديني
 class AppDarkColors {
   static const Color background = Color(0xFF121212);
   static const Color primary = Color(0xFF1A3C40);

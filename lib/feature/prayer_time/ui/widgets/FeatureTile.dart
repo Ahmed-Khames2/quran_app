@@ -28,7 +28,7 @@ class FeatureTile extends StatelessWidget {
             child: Icon(
               icon,
               size: 30,
-              color: theme.primaryColor, // استخدم اللون الرئيسي من الثيم
+              color: theme.iconTheme.color, // استخدم اللون الرئيسي من الثيم
             ),
           ),
           const SizedBox(height: 8),
@@ -36,6 +36,7 @@ class FeatureTile extends StatelessWidget {
             label,
             style: TextStyle(
               fontWeight: FontWeight.w600,
+              fontFamily: 'me_quran',
               color: theme.textTheme.bodyLarge?.color, // استخدم اللون من الثيم
             ),
           ),

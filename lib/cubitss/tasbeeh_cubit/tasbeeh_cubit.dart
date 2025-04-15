@@ -26,6 +26,7 @@ class TasbeehCubit extends Cubit<TasbeehState> {
 
     emit(state.copyWith(counts: updatedCounts, rounds: updatedRounds));
   }
+
   // لتغيير الصفحة الحالية
   void setCurrentIndex(int index) {
     emit(state.copyWith(currentIndex: index));

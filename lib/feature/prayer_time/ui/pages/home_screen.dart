@@ -38,14 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(title: const Text('مواقيت الصلاة')),
-        body: Center(
-          child: Text(
-            locationMessage,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 18),
-          ),
-        ),
+       
       ),
     );
   }

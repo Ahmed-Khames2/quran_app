@@ -30,12 +30,15 @@ class QuranCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: theme.colorScheme.primaryContainer, // The icon background will use the theme's primary color.
+                // color: theme.secondaryHeaderColor, // The icon background will use the theme's primary color.
+                // color: const Color.fromARGB(255, 226, 219, 136),
+                color: theme.appBarTheme.backgroundColor,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.menu_book_rounded,
-                color: theme.iconTheme.color, // The icon color will follow the theme's icon color.
+                color: const Color.fromARGB(255, 226, 219, 136),
+                // The icon color will follow the theme's icon color.
                 size: 28,
               ),
             ),
@@ -45,7 +48,9 @@ class QuranCard extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: theme.textTheme.bodyLarge?.color, // The text color will use the theme's bodyText1 color.
+                fontFamily: 'me_quran',
+                color: theme.textTheme.bodyLarge
+                    ?.color, // The text color will use the theme's bodyText1 color.
               ),
             ),
           ],
@@ -54,3 +59,6 @@ class QuranCard extends StatelessWidget {
     );
   }
 }
+
+/** color: theme.appBarTheme
+                    .backgroundColor,  */

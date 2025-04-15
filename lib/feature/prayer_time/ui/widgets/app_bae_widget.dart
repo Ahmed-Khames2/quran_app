@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/ui/pages/select_city_page.dart';
-import 'package:theam_mood_with_block/pages/setting_page.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String cityName;
@@ -17,29 +16,29 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     final theme = Theme.of(context);
 
     return AppBar(
-      leading: IconButton(
-        icon: const Icon(Icons.settings),
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const SettingPage()));
-        },
-      ),
-      title: const Text(
-        "Al-Quds",
-        style: TextStyle(
-          fontSize: 34,
-          fontFamily: 'me_quran',
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-          shadows: [
-            Shadow(
-              offset: Offset(1, 1),
-              blurRadius: 2.0,
-              color: Colors.black26,
-            ),
-          ],
+      title: Image(
+        image: const AssetImage(
+          'assets/icon/ChatGPT_Image_Apr_15__2025__05_13_05_AM-removebg-preview.png',
         ),
+        height: 80,
+        width: 160,
       ),
+      // title: const Text(
+      //   "Al-Quds",
+      //   style: TextStyle(
+      //     fontSize: 34,
+      //     fontFamily: 'me_quran',
+      //     fontWeight: FontWeight.bold,
+      //     color: Colors.white,
+      //     shadows: [
+      //       Shadow(
+      //         offset: Offset(1, 1),
+      //         blurRadius: 2.0,
+      //         color: Colors.black26,
+      //       ),
+      //     ],
+      //   ),
+      // ),
       centerTitle: true,
       actions: [
         Padding(
