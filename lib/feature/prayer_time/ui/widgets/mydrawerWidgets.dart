@@ -1,8 +1,10 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:theam_mood_with_block/core/constant.dart';
 import 'package:theam_mood_with_block/pages/setting_page.dart';
 import 'package:url_launcher/url_launcher.dart';
-// import 'package:share_plus/share_plus.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -20,15 +22,15 @@ class MyDrawer extends StatelessWidget {
             ),
             child: Stack(
               children: [
-                const Row(
+                Row(
                   children: [
                     CircleAvatar(
-                      radius: 35,
+                      radius: 35.r, // استخدم .r لجعل الحجم responsive
                       backgroundColor: Colors.white,
-                      backgroundImage: AssetImage(
-                          'assets/icon/ChatGPT_Image_Apr_15__2025__05_13_05_AM-removebg-preview.png'),
+                      backgroundImage: const AssetImage(
+                        'assets/icon/ChatGPT_Image_Apr_15__2025__05_13_05_AM-removebg-preview.png'),
                     ),
-                    SizedBox(width: 12),
+                    SizedBox(width: 12.w), // استخدم .w لتحديد المسافة بين العناصر
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,16 +38,16 @@ class MyDrawer extends StatelessWidget {
                         Text(
                           'Al-Quran App',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 20.sp, // استخدم .sp لتحديد حجم الخط
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 4),
+                        SizedBox(height: 4.h), // استخدم .h لتحديد المسافة الرأسية
                         Text(
-                          'رحلة روحانية يومية ✨',
+                          'راحة لقلبك وطمأنينة لروحك',
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             color: Colors.white70,
                           ),
                         ),
@@ -54,7 +56,7 @@ class MyDrawer extends StatelessWidget {
                   ],
                 ),
                 Positioned(
-                  top: -17,
+                  top: -17.h,
                   right: 0,
                   child: Align(
                     alignment: Alignment.topRight,
@@ -93,7 +95,6 @@ class MyDrawer extends StatelessWidget {
                     // Share.share(
                     //   'جرب تطبيق القرآن الكريم 🌙\nhttps://github.com/Ahmed-Khames2',
                     // );
-                    // Navigator.pop(context);
                   },
                 ),
                 ListTile(
@@ -117,10 +118,11 @@ class MyDrawer extends StatelessWidget {
                       applicationName: "Al-Quran App",
                       applicationVersion: "1.0.0",
                       applicationIcon:
-                          Image.asset('assets/icon/quran.png', height: 40),
+                          Image.asset('assets/icon/quran.png', height: 40.h), // استخدم .h لتحديد الارتفاع
                       children: const [
                         Text(
-                            "تطبيق قرآن كريم بسيط وسهل الاستخدام، صمم خصيصًا ليكون رفيقك اليومي في التلاوة والتدبر."),
+                          "تطبيق قرآن كريم بسيط وسهل الاستخدام، صمم خصيصًا ليكون رفيقك اليومي في التلاوة والتدبر.",
+                        ),
                       ],
                     );
                   },
@@ -138,11 +140,36 @@ class MyDrawer extends StatelessWidget {
                       await launchUrl(emailLaunchUri,
                           mode: LaunchMode.externalApplication);
                     } else {
+                      // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('تعذر فتح تطبيق البريد')),
                       );
                     }
                   },
+                ),
+                const Divider(thickness: 1, height: 24),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h), // استخدم .w و .h لتحديد المسافة
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade50,
+                      borderRadius: BorderRadius.circular(12.r), // استخدم .r لتحديد نصف القطر
+                    ),
+                    child: ListTile(
+                      leading: const Icon(Icons.volunteer_activism,
+                          color: Colors.green),
+                      title: Text(
+                        'قال ﷺ: "إذا مات ابن آدم انقطع عمله إلا من ثلاث: '
+                        'صدقة جارية، أو علم يُنتفع به، أو ولد صالح يدعو له."\n'
+                        'نسألكم الدعاء لوالدي خميس محمد بالرحمة والمغفرة 🤲',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: theme.primaryColor,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -150,17 +177,17 @@ class MyDrawer extends StatelessWidget {
 
           // 🔻 Footer
           Padding(
-            padding: const EdgeInsets.only(bottom: 12.0),
+            padding: EdgeInsets.only(bottom: 12.h), // استخدم .h لتحديد المسافة السفلية
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.code, size: 16, color: Colors.grey.shade600),
-                const SizedBox(width: 4),
+                Icon(Icons.code, size: 16.sp, color: Colors.grey.shade600), // استخدم .sp لتحديد الحجم
+                SizedBox(width: 4.w), // استخدم .w لتحديد المسافة بين العناصر
                 Text(
                   'Developed by Ahmed Khames',
                   style: TextStyle(
                     color: Colors.grey.shade600,
-                    fontSize: 12,
+                    fontSize: 12.sp, // استخدم .sp لتحديد الحجم
                   ),
                 ),
               ],
@@ -170,5 +197,4 @@ class MyDrawer extends StatelessWidget {
       ),
     );
   }
-
 }

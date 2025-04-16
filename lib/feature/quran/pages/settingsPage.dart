@@ -1,4 +1,7 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // استيراد مكتبة screenutil
 import 'package:theam_mood_with_block/core/constant.dart';
 
 class Settings extends StatefulWidget {
@@ -17,13 +20,15 @@ class _SettingsState extends State<Settings> {
       appBar: AppBar(
         title: Text(
           "الإعدادات",
-          style: theme.textTheme.titleLarge,
+          style: theme.textTheme.titleLarge?.copyWith(
+            fontSize: 24.sp, // استخدام screenutil لحجم الخط
+          ),
         ),
         backgroundColor: theme.primaryColor,
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.0.w), // استخدام screenutil في padding
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +37,7 @@ class _SettingsState extends State<Settings> {
                   'Arabic Font Size:',
                   style: theme.textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
-                    fontSize: 15,
+                    fontSize: 15.sp, // استخدام screenutil لحجم الخط
                   ),
                 ),
                 Slider(
@@ -50,7 +55,7 @@ class _SettingsState extends State<Settings> {
                   "‏ ‏‏ ‏‏‏‏ ‏‏‏‏‏‏ ‏",
                   style: TextStyle(
                     fontFamily: 'quran',
-                    fontSize: arabicFontSize,
+                    fontSize: arabicFontSize.sp, // استخدام screenutil لحجم الخط
                     color: theme.textTheme.bodyLarge?.color,
                   ),
                   textDirection: TextDirection.rtl,
@@ -63,7 +68,7 @@ class _SettingsState extends State<Settings> {
                   'Mushaf Mode Font Size:',
                   style: theme.textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
-                    fontSize: 15,
+                    fontSize: 15.sp, // استخدام screenutil لحجم الخط
                   ),
                 ),
                 Slider(
@@ -81,7 +86,7 @@ class _SettingsState extends State<Settings> {
                   "‏ ‏‏ ‏‏‏‏ ‏‏‏‏‏‏ ‏",
                   style: TextStyle(
                     fontFamily: 'quran',
-                    fontSize: mushafFontSize,
+                    fontSize: mushafFontSize.sp, // استخدام screenutil لحجم الخط
                     color: theme.textTheme.bodyLarge?.color,
                   ),
                   textDirection: TextDirection.rtl,
@@ -101,7 +106,10 @@ class _SettingsState extends State<Settings> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: theme.primaryColor,
                       ),
-                      child: const Text('Reset'),
+                      child: Text(
+                        'Reset',
+                        style: TextStyle(fontSize: 16.sp), // استخدام screenutil
+                      ),
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -111,7 +119,10 @@ class _SettingsState extends State<Settings> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: theme.primaryColor,
                       ),
-                      child: const Text('Save'),
+                      child: Text(
+                        'Save',
+                        style: TextStyle(fontSize: 16.sp), // استخدام screenutil
+                      ),
                     ),
                   ],
                 ),

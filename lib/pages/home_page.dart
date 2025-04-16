@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:theam_mood_with_block/feature/names_of_allah/pages/names_page.dart';
 import 'package:theam_mood_with_block/feature/quran/pages/quran_home.dart';
-import 'package:theam_mood_with_block/feature/ziker/pages/homepage.dart';
+// import 'package:theam_mood_with_block/feature/ziker/pages/homepage.dart';
 
 /// الصفحة الرئيسية للتطبيق.
 class HomePage extends StatelessWidget {
@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
               height: 100,
               width: 100,
               color: Colors.red,
-              child: Text('hllllllllllo'),
+              child: const Text('hllllllllllo'),
             ),
             const Text("Hello World"),
           ],

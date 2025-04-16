@@ -1,6 +1,5 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // استيراد مكتبة screenutil
 
 class SallahAlaMohamed extends StatelessWidget {
   const SallahAlaMohamed({
@@ -19,17 +18,20 @@ class SallahAlaMohamed extends StatelessWidget {
           Text(
             'اللهم صلِّ وسلم على نبينا محمد',
             style: TextStyle(
-              fontSize: 30,
+              fontSize: 30.sp, // استخدام screenutil لحجم الخط
               fontWeight: FontWeight.bold,
               fontFamily: 'me_quran', // Custom font if available
-              color: theme.textTheme.titleLarge?.color ?? theme.appBarTheme.backgroundColor, // Text color adapts to theme
+              color: theme.textTheme.titleLarge?.color ?? 
+                     theme.appBarTheme.backgroundColor, // Text color adapts to theme
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
-          // You can add more elements or functionality as needed
+          SizedBox(height: 16.h), // استخدام screenutil للمسافات بين العناصر
+          // يمكنك إضافة عناصر أو وظائف إضافية حسب الحاجة
         ],
       ),
     );
   }
 }
+
+            // 'صلِّ على محمد ﷺ',

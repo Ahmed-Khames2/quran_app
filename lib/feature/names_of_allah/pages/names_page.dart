@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // إضافة مكتبة ScreenUtil
 import 'package:theam_mood_with_block/feature/names_of_allah/models/allah_name_model.dart';
 
 class NamesOfAllahPage extends StatefulWidget {
@@ -51,13 +52,8 @@ class _NamesOfAllahPageState extends State<NamesOfAllahPage> {
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            // fontFamily: 'me_quran',
           ),
-          // style: theme.textTheme.titleLarge?.copyWith(
-          //   fontWeight: FontWeight.bold,
-          // ),
         ),
-        // centerTitle: true,
         elevation: sqrt1_2,
       ),
       body: isLoading
@@ -68,28 +64,28 @@ class _NamesOfAllahPageState extends State<NamesOfAllahPage> {
             )
           : ListView.builder(
               itemCount: allahNames.length,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h), // استخدام ScreenUtil هنا
               itemBuilder: (context, index) {
                 final name = allahNames[index];
                 return Card(
                   elevation: 4,
-                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  margin: EdgeInsets.symmetric(vertical: 8.h), // استخدام ScreenUtil هنا
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(16.r), // استخدام ScreenUtil هنا
                   ),
                   color: theme.cardColor,
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(16.w), // استخدام ScreenUtil هنا
                     child: Row(
                       children: [
                         Column(
                           children: [
                             SizedBox(
-                              height: 100,
+                              height: 100.h, // استخدام ScreenUtil هنا
                               child: Text(
                                 name.name,
                                 style: theme.textTheme.titleLarge?.copyWith(
-                                  fontSize: name.number == 85 ? 20 : 45,
+                                  fontSize: name.number == 85 ? 20.sp : 45.sp, // استخدام ScreenUtil هنا
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 1.5,
                                   fontFamily: 'quran_smart',
@@ -98,19 +94,20 @@ class _NamesOfAllahPageState extends State<NamesOfAllahPage> {
                             ),
                           ],
                         ),
-                        const SizedBox(width: 16),
+                        SizedBox(width: 16.w), // استخدام ScreenUtil هنا
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 12),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 8.h, horizontal: 12.w), // استخدام ScreenUtil هنا
                                 decoration: BoxDecoration(
                                   color: isDark
+                                      // ignore: deprecated_member_use
                                       ? theme.colorScheme.surfaceVariant
                                       : theme.colorScheme.surface,
-                                  borderRadius: BorderRadius.circular(12),
+                                  borderRadius: BorderRadius.circular(12.r), // استخدام ScreenUtil هنا
                                 ),
                                 child: Text(
                                   name.number.toString(),
@@ -119,26 +116,27 @@ class _NamesOfAllahPageState extends State<NamesOfAllahPage> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 12),
+                              SizedBox(height: 12.h), // استخدام ScreenUtil هنا
                               Text(
                                 name.name,
                                 style: theme.textTheme.titleLarge?.copyWith(
-                                  fontSize: name.number == 85 ? 25 : 30,
+                                  fontSize: name.number == 85 ? 25.sp : 30.sp, // استخدام ScreenUtil هنا
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 1.5,
                                   fontFamily: 'me_quran',
                                 ),
                               ),
-                              const SizedBox(height: 4),
+                              SizedBox(height: 4.h), // استخدام ScreenUtil هنا
                               Text(
                                 name.description,
                                 style: theme.textTheme.bodyLarge?.copyWith(
-                                  fontSize: 16,
+                                  fontSize: 16.sp, // استخدام ScreenUtil هنا
                                   color: theme.textTheme.bodyLarge?.color
+                                      // ignore: deprecated_member_use
                                       ?.withOpacity(0.7),
                                 ),
                                 textAlign: TextAlign.right,
-                                // textDirection: TextDirection.rtl,
+                                // ignore: deprecated_member_use
                                 textScaleFactor: 1.2,
                               ),
                             ],

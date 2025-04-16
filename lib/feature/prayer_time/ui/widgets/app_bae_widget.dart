@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/ui/pages/select_city_page.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
@@ -20,29 +21,13 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         image: const AssetImage(
           'assets/icon/ChatGPT_Image_Apr_15__2025__05_13_05_AM-removebg-preview.png',
         ),
-        height: 80,
-        width: 160,
+        height: 80.h, // استخدام ScreenUtil للأبعاد
+        width: 160.w, // استخدام ScreenUtil للأبعاد
       ),
-      // title: const Text(
-      //   "Al-Quds",
-      //   style: TextStyle(
-      //     fontSize: 34,
-      //     fontFamily: 'me_quran',
-      //     fontWeight: FontWeight.bold,
-      //     color: Colors.white,
-      //     shadows: [
-      //       Shadow(
-      //         offset: Offset(1, 1),
-      //         blurRadius: 2.0,
-      //         color: Colors.black26,
-      //       ),
-      //     ],
-      //   ),
-      // ),
       centerTitle: true,
       actions: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: EdgeInsets.symmetric(horizontal: 8.w), // استخدام ScreenUtil للأبعاد
           child: GestureDetector(
             onTap: () {
               Navigator.push(
@@ -55,12 +40,16 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               children: [
                 Text(
                   cityName,
-                  style: const TextStyle(
-                    fontSize: 16,
+                  style: TextStyle(
+                    fontSize: 16.sp, // استخدام ScreenUtil لحجم الخط
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                Icon(Icons.edit_location_alt)
+                SizedBox(width: 8.w), // استخدام ScreenUtil للأبعاد
+                Icon(
+                  Icons.edit_location_alt,
+                  size: 24.sp, // استخدام ScreenUtil لحجم الأيقونة
+                ),
               ],
             ),
           ),

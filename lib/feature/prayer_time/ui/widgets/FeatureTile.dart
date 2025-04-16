@@ -1,5 +1,8 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FeatureTile extends StatefulWidget {
   final IconData icon;
@@ -7,11 +10,11 @@ class FeatureTile extends StatefulWidget {
   final VoidCallback onTap;
 
   const FeatureTile({
-    Key? key,
+    super.key,
     required this.icon,
     required this.label,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   State<FeatureTile> createState() => _FeatureTileState();
@@ -41,8 +44,10 @@ class _FeatureTileState extends State<FeatureTile> {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r), // استخدام ScreenUtil للحدود
+        // ignore: deprecated_member_use
         splashColor: theme.primaryColor.withOpacity(0.2),
+        // ignore: deprecated_member_use
         highlightColor: theme.primaryColor.withOpacity(0.1),
         onTap: _handleTap,
         child: Column(
@@ -50,39 +55,41 @@ class _FeatureTileState extends State<FeatureTile> {
             AnimatedContainer(
               duration: const Duration(milliseconds: 500),
               curve: Curves.easeOut,
-              padding: EdgeInsets.all(_glow ? 6 : 0),
+              padding: EdgeInsets.all(_glow ? 6.r : 0), // استخدام ScreenUtil للأبعاد
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 boxShadow: _glow
                     ? [
                         BoxShadow(
+                          // ignore: deprecated_member_use
                           color: theme.primaryColor.withOpacity(0.6),
-                          blurRadius: 20,
-                          spreadRadius: 4,
+                          blurRadius: 20.r, // استخدام ScreenUtil للظل
+                          spreadRadius: 4.r, // استخدام ScreenUtil للظل
                         )
                       ]
                     : [],
               ),
               child: CircleAvatar(
-                radius: 28,
+                radius: 28.r, // استخدام ScreenUtil للأبعاد
                 backgroundColor: theme.cardColor,
                 child: Icon(
                   widget.icon,
-                  size: 30,
+                  size: 30.sp, // استخدام ScreenUtil لحجم الأيقونة
                   color: theme.iconTheme.color,
                 ),
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.h), // استخدام ScreenUtil للأبعاد
             SizedBox(
-              width: 80,
-              height: 20,
+              width: 80.w, // استخدام ScreenUtil للأبعاد
+              height: 20.h, // استخدام ScreenUtil للأبعاد
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   final textStyle = TextStyle(
                     fontWeight: FontWeight.w600,
                     fontFamily: 'me_quran',
                     color: theme.textTheme.bodyLarge?.color,
+                    fontSize: 14.sp, // استخدام ScreenUtil لحجم الخط
                   );
 
                   final textPainter = TextPainter(

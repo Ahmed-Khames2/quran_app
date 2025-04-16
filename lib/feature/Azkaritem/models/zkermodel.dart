@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/zkermodel.dart'; // التأكد من استيراد ZekrModel
+// import '../models/zkermodel.dart'; // التأكد من استيراد ZekrModel
 
 class AzkarItem {
   final String title;

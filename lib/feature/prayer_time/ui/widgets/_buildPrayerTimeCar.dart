@@ -1,4 +1,7 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PrayerTimeCard extends StatelessWidget {
   final String title;
@@ -20,26 +23,27 @@ class PrayerTimeCard extends StatelessWidget {
     return Card(
       color: cardColor,
       elevation: 3,
-      margin: const EdgeInsets.symmetric(vertical: 8),
+      margin: EdgeInsets.symmetric(vertical: 8.h), // استخدام ScreenUtil للأبعاد
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r), // استخدام ScreenUtil للتدوير
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h), // استخدام ScreenUtil للأبعاد
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
                 CircleAvatar(
+                  // ignore: deprecated_member_use
                   backgroundColor: iconColor.withOpacity(0.1),
                   child: Icon(_getPrayerIcon(title), color: iconColor),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12.w), // استخدام ScreenUtil للأبعاد
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 18.sp, // استخدام ScreenUtil لتحديد حجم الخط
                     fontWeight: FontWeight.w600,
                     color: textColor,
                   ),
@@ -52,16 +56,17 @@ class PrayerTimeCard extends StatelessWidget {
                 Text(
                   formatTime(time),
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 16.sp, // استخدام ScreenUtil لتحديد حجم الخط
                     fontWeight: FontWeight.bold,
                     color: textColor,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.h), // استخدام ScreenUtil للأبعاد
                 Text(
                   timeOfDay(time),
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 14.sp, // استخدام ScreenUtil لتحديد حجم الخط
+                    // ignore: deprecated_member_use
                     color: textColor.withOpacity(0.7),
                   ),
                 ),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:theam_mood_with_block/cubitss/azkar_cubit/favorite_cubit.dart';
 
 class FavoriteAzkarPage extends StatefulWidget {
+  const FavoriteAzkarPage({super.key});
+
   @override
   State<FavoriteAzkarPage> createState() => _FavoriteAzkarPageState();
 }
@@ -38,7 +41,10 @@ class _FavoriteAzkarPageState extends State<FavoriteAzkarPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("الأذكار المفضلة"),
+        title: Text(
+          "الأذكار المفضلة",
+          style: TextStyle(fontSize: 20.sp),
+        ),
       ),
       body: BlocBuilder<FavoriteCubit, FavoriteState>(
         builder: (context, state) {
@@ -48,7 +54,7 @@ class _FavoriteAzkarPageState extends State<FavoriteAzkarPage> {
             return Center(
               child: Text(
                 "لا يوجد أذكار مفضلة بعد",
-                style: TextStyle(color: textColor, fontSize: 18),
+                style: TextStyle(color: textColor, fontSize: 18.sp),
               ),
             );
           }
@@ -67,25 +73,25 @@ class _FavoriteAzkarPageState extends State<FavoriteAzkarPage> {
                   itemBuilder: (context, index) {
                     final text = favorites[index];
                     return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
                       child: Card(
                         color: theme.cardColor,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(20.r),
                         ),
                         elevation: 6,
                         child: Padding(
-                          padding: const EdgeInsets.all(20),
+                          padding: EdgeInsets.all(20.w),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Row(
+                             const  Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
-                                children: const [
-                                  Icon(Icons.favorite, color: Colors.red, size: 30),
+                                children: [
+                                   Icon(Icons.favorite, color: Colors.red, size: 30),
                                 ],
                               ),
-                              const SizedBox(height: 20),
+                              SizedBox(height: 20.h),
                               Expanded(
                                 child: SingleChildScrollView(
                                   child: Text(
@@ -93,13 +99,13 @@ class _FavoriteAzkarPageState extends State<FavoriteAzkarPage> {
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: textColor,
-                                      fontSize: 22,
+                                      fontSize: 22.sp,
                                       height: 1.6,
                                     ),
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 20),
+                              SizedBox(height: 20.h),
                               ElevatedButton.icon(
                                 onPressed: () {
                                   context.read<FavoriteCubit>().toggleFavorite(text);
@@ -114,9 +120,9 @@ class _FavoriteAzkarPageState extends State<FavoriteAzkarPage> {
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.red,
                                   foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
+                                    borderRadius: BorderRadius.circular(12.r),
                                   ),
                                 ),
                               ),
@@ -129,26 +135,25 @@ class _FavoriteAzkarPageState extends State<FavoriteAzkarPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 20),
+                padding: EdgeInsets.only(bottom: 20.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
-                      icon: Icon(Icons.arrow_back_ios, color: textColor),
+                      icon: Icon(Icons.arrow_back_ios, color: textColor, size: 24.sp),
                       onPressed: () => _goToPage(currentIndex - 1),
                     ),
                     Text(
                       "${currentIndex + 1} / ${favorites.length}",
-                      style: TextStyle(color: textColor, fontSize: 16),
+                      style: TextStyle(color: textColor, fontSize: 16.sp),
                     ),
                     IconButton(
-                      icon: Icon(Icons.arrow_forward_ios, color: textColor),
+                      icon: Icon(Icons.arrow_forward_ios, color: textColor, size: 24.sp),
                       onPressed: () => _goToPage(currentIndex + 1),
                     ),
                   ],
                 ),
               ),
-              
             ],
           );
         },

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // استيراد مكتبة screenutil
 
 class PrayerTimeCard extends StatelessWidget {
   final String title;
   final DateTime time;
   final IconData icon;
 
-  const PrayerTimeCard({
+  const PrayerTimeCard({super.key, 
     required this.title,
     required this.time,
     required this.icon,
@@ -27,24 +28,21 @@ class PrayerTimeCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      padding: EdgeInsets.symmetric(vertical: 6.0.h), // استخدام screenutil للـ padding
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              Icon(icon,
-                  color:
-                      theme.iconTheme.color), // استخدم اللون الرئيسي من الثيم
-              const SizedBox(width: 8),
+              Icon(icon, color: theme.iconTheme.color),
+              SizedBox(width: 8.w), // استخدام screenutil للـ spacing
               Text(
                 title,
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 22.sp, // استخدام screenutil لحجم الخط
                   fontWeight: FontWeight.w600,
                   fontFamily: 'me_quran',
-                  color: theme
-                      .textTheme.bodyLarge?.color, // استخدم اللون النص من الثيم
+                  color: theme.textTheme.bodyLarge?.color,
                 ),
               ),
             ],
@@ -52,9 +50,8 @@ class PrayerTimeCard extends StatelessWidget {
           Text(
             '${formatTime(time)} - ${timeOfDay(time)}',
             style: TextStyle(
-              fontSize: 16,
-              color:
-                  theme.textTheme.bodyMedium?.color, // استخدم لون النص من الثيم
+              fontSize: 16.sp, // استخدام screenutil لحجم الخط
+              color: theme.textTheme.bodyMedium?.color,
             ),
           ),
         ],

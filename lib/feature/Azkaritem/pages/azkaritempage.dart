@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:theam_mood_with_block/feature/Azkaritem/db/azkar_data.dart';
 import 'favorite_azkar_page.dart';
 import 'AzkarDetailsPage.dart';
@@ -10,16 +11,19 @@ class AzkarHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("الأذكار"),
+        title: Text(
+          "الأذكار",
+          style: TextStyle(fontSize: 20.sp),
+        ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         actions: [
           IconButton(
-            icon: const Icon(Icons.favorite),
+            icon: Icon(Icons.favorite, size: 24.sp),
             tooltip: "الأذكار المفضلة",
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => FavoriteAzkarPage()),
+                MaterialPageRoute(builder: (_) => const FavoriteAzkarPage()),
               );
             },
           ),
@@ -27,48 +31,56 @@ class AzkarHomePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 16),
-          const Padding(
-            padding: EdgeInsets.only(right: 20),
+          SizedBox(height: 16.h),
+          Padding(
+            padding: EdgeInsets.only(right: 20.w),
             child: Align(
               alignment: Alignment.centerRight,
               child: Text(
                 "قائمة الأذكار",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10.h),
           Expanded(
             child: ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               itemCount: azkarList.length,
               separatorBuilder: (context, index) => const Divider(),
               itemBuilder: (context, index) {
                 final item = azkarList[index];
-                return ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).cardColor,
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
-                  tileColor: Theme.of(context).cardColor,
-                  title: Text(
-                    item.title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 20,
-                      fontFamily: 'me_quran',
+                  child: ListTile(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
-                    textAlign: TextAlign.right,
-                  ),
-                  trailing: Icon(item.icon, color: Colors.greenAccent),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => AzkarDetailsPage(item: item),
+                    title: Text(
+                      item.title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20.sp,
+                        fontFamily: 'me_quran',
                       ),
-                    );
-                  },
+                      textAlign: TextAlign.right,
+                    ),
+                    trailing: Icon(item.icon, color: Colors.greenAccent, size: 24.sp),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => AzkarDetailsPage(item: item),
+                        ),
+                      );
+                    },
+                  ),
                 );
               },
             ),

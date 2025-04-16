@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/models/city_model.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/services/city_service.dart';
-
 class SelectCityPage extends StatefulWidget {
   const SelectCityPage({super.key});
 
@@ -35,25 +35,34 @@ class _SelectCityPageState extends State<SelectCityPage> {
           'تأكيد تغيير المدينة',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.bold,
+                fontSize: 18.sp, // استخدام ScreenUtil لتحديد حجم الخط
               ),
         ),
         content: Text(
           'هل أنت متأكد أنك تريد تغيير المدينة إلى ${city.name}؟',
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                fontSize: 16.sp,
+              ),
         ),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(context, false),
             child: Text(
               'إلغاء',
-              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.secondary,
+                fontSize: 14.sp, // استخدام ScreenUtil لتحديد حجم الخط
+              ),
             ),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             child: Text(
               'تأكيد',
-              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 14.sp,
+              ),
             ),
           ),
         ],
@@ -61,6 +70,7 @@ class _SelectCityPageState extends State<SelectCityPage> {
     );
 
     if (isConfirmed == true) {
+      // ignore: use_build_context_synchronously
       Navigator.pop(context, city);
     }
   }
@@ -73,7 +83,10 @@ class _SelectCityPageState extends State<SelectCityPage> {
       appBar: AppBar(
         title: Text(
           "اختر المدينة",
-          style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+          style: theme.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+            fontSize: 20.sp, // استخدام ScreenUtil لتحديد حجم الخط
+          ),
         ),
       ),
       body: isLoading
@@ -87,14 +100,16 @@ class _SelectCityPageState extends State<SelectCityPage> {
               itemBuilder: (context, index) {
                 final city = cities[index];
                 return Card(
-                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w), // استخدام ScreenUtil للأبعاد
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r), // استخدام ScreenUtil للتدوير
                   ),
                   child: ListTile(
                     title: Text(
                       city.name,
-                      style: theme.textTheme.bodyLarge,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontSize: 16.sp, // استخدام ScreenUtil لتحديد حجم الخط
+                      ),
                     ),
                     onTap: () => _showConfirmDialog(city),
                   ),

@@ -12,6 +12,7 @@ extension ArabicNumberExtension on String {
       '8': '٨',
       '9': '٩',
     };
+    // ignore: unnecessary_this
     return this.split('').map((e) => arabicMap[e] ?? e).join('');
   }
 }

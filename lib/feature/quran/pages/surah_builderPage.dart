@@ -1,8 +1,12 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // استيراد مكتبة screenutil
 import 'package:theam_mood_with_block/core/constant.dart';
 import 'package:theam_mood_with_block/feature/quran/pages/settingsPage.dart';
 import 'package:theam_mood_with_block/feature/quran/widgets/RetunBasmalaWidget.dart';
 
+// ignore: must_be_immutable
 class SurahBuilder extends StatefulWidget {
   final int sura;
   final List arabic;
@@ -18,6 +22,7 @@ class SurahBuilder extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _SurahBuilderState createState() => _SurahBuilderState();
 }
 
@@ -32,6 +37,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
       }
     }
 
+    // ignore: non_constant_identifier_names
     int LengthOfSura = noOfVerses[widget.sura];
     String fullSura = '';
 
@@ -50,11 +56,11 @@ class _SurahBuilderState extends State<SurahBuilder> {
         centerTitle: true,
         title: Text(
           widget.suraName,
-          style: const TextStyle(
-            fontSize: 30,
+          style: TextStyle(
+            fontSize: 30.sp, // استخدام screenutil لحجم الخط
             fontWeight: FontWeight.bold,
             fontFamily: 'me_quran',
-            shadows: [
+            shadows:const [
               Shadow(
                 offset: Offset(1, 1),
                 blurRadius: 2.0,
@@ -95,13 +101,13 @@ class _SurahBuilderState extends State<SurahBuilder> {
                       ? const RetunBasmala()
                       : const SizedBox(),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0.w), // استخدام screenutil في padding
                     child: Text(
                       fullSura,
                       textDirection: TextDirection.rtl,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: mushafFontSize,
+                        fontSize: mushafFontSize.sp, // استخدام screenutil لحجم الخط
                         fontFamily: arabicFont,
                         color: Theme.of(context).textTheme.bodyLarge?.color,
                       ),

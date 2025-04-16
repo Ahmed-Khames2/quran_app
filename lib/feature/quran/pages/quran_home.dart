@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // استيراد مكتبة screenutil
 import 'package:theam_mood_with_block/core/constant.dart';
 import 'package:theam_mood_with_block/feature/quran/widgets/arabic_sura_numberWidget.dart';
 import 'surah_builderPage.dart';
@@ -20,7 +21,7 @@ class _QuranHomeState extends State<QuranHome> {
         title: Text(
           "القرآن الكريم",
           style: theme.textTheme.titleLarge?.copyWith(
-            fontSize: 26,
+            fontSize: 26.sp, // استخدام screenutil لحجم الخط
             fontWeight: FontWeight.bold,
             shadows: const [
               Shadow(
@@ -73,7 +74,9 @@ class _QuranHomeState extends State<QuranHome> {
         itemBuilder: (context, i) {
           return Container(
             color: i % 2 == 0
+                // ignore: deprecated_member_use
                 ? theme.cardColor.withOpacity(0.95)
+                // ignore: deprecated_member_use
                 : theme.cardColor.withOpacity(0.85),
             child: TextButton(
               onPressed: () {
@@ -100,7 +103,7 @@ class _QuranHomeState extends State<QuranHome> {
                     child: Text(
                       arabicName[i]['name'],
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 30.sp, // استخدام screenutil لحجم الخط
                         fontFamily: 'me_quran',
                         color: theme.textTheme.bodyLarge?.color,
                         shadows: const [
