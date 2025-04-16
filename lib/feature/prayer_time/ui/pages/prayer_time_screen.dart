@@ -158,7 +158,7 @@ class PrayerTimeScreen extends StatelessWidget {
                   ),
                   FeatureTile(
                     icon: Icons.star,
-                    label: "أسماء الله",
+                    label: " أسماء الله الحسنى",
                     onTap: () {
                       Navigator.push(
                           context,

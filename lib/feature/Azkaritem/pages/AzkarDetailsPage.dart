@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:theam_mood_with_block/cubitss/azkar_cubit/favorite_cubit.dart';
-import '../models/zkermodel.dart';  // التأكد من استيراد ZekrModel
+import '../models/zkermodel.dart'; // التأكد من استيراد ZekrModel
 import '../db/favorite_manager.dart';
 
 class AzkarDetailsPage extends StatefulWidget {
@@ -49,17 +49,47 @@ class _AzkarDetailsPageState extends State<AzkarDetailsPage> {
   }
 
   void _showFinishedDialog() {
+    final theme = Theme.of(context);
     showDialog(
       context: context,
-      builder: (_) => AlertDialog(
-        title: const Text("تهانينا"),
-        content: Text("لقد انتهيت من ${widget.item.title}!"),
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        backgroundColor: theme.colorScheme.surface,
+        title: Row(
+          children: [
+            Icon(Icons.check_circle, color: theme.colorScheme.primary),
+            const SizedBox(width: 8),
+            Text(
+              "تهانينا",
+              style: theme.textTheme.titleLarge?.copyWith(
+                  color: theme.colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'me_quran',
+                  fontSize: 20),
+            ),
+          ],
+        ),
+        content: Text(
+          "لقد أنهيت ${widget.item.title} بنجاح!",
+          style: theme.textTheme.bodyLarge?.copyWith(
+            color: theme.colorScheme.onBackground,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        actionsAlignment: MainAxisAlignment.center,
         actions: [
-          TextButton(
-            child: const Text("حسناً"),
+          TextButton.icon(
+            icon: Icon(Icons.done, color: theme.colorScheme.primary),
+            label: Text(
+              "تم",
+              style: theme.textTheme.labelLarge?.copyWith(
+                  color: theme.colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+            ),
             onPressed: () {
-              Navigator.pop(context);
-              Navigator.pop(context);
+              Navigator.pop(context); // Close dialog
+              Navigator.pop(context); // Go back
             },
           ),
         ],
@@ -117,6 +147,7 @@ class _AzkarDetailsPageState extends State<AzkarDetailsPage> {
                           padding: const EdgeInsets.all(24),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            // crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Expanded(
                                 child: SingleChildScrollView(
@@ -124,8 +155,9 @@ class _AzkarDetailsPageState extends State<AzkarDetailsPage> {
                                     zikr.text,
                                     textAlign: TextAlign.center,
                                     style: theme.textTheme.bodyLarge!.copyWith(
-                                      fontSize: 20,
-                                      height: 1.8,
+                                      fontSize: 22,
+                                      height: 2.1,
+                                      fontFamily: 'me_quran',
                                     ),
                                   ),
                                 ),
@@ -133,12 +165,16 @@ class _AzkarDetailsPageState extends State<AzkarDetailsPage> {
                               const SizedBox(height: 20),
                               IconButton(
                                 icon: Icon(
-                                  isFav ? Icons.favorite : Icons.favorite_border,
+                                  isFav
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
                                   color: Colors.redAccent,
                                   size: 30,
                                 ),
                                 onPressed: () {
-                                  context.read<FavoriteCubit>().toggleFavorite(zikr.text);
+                                  context
+                                      .read<FavoriteCubit>()
+                                      .toggleFavorite(zikr.text);
                                 },
                               ),
                             ],
@@ -152,17 +188,21 @@ class _AzkarDetailsPageState extends State<AzkarDetailsPage> {
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
             width: double.infinity,
             child: ElevatedButton(
               onPressed: _nextZikr,
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-                backgroundColor: theme.elevatedButtonTheme.style?.backgroundColor?.resolve({}),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                // backgroundColor: theme
+                //     .elevatedButtonTheme.style?.backgroundColor
+                //     ?.resolve({}),
+                backgroundColor: theme.appBarTheme.backgroundColor,
               ),
               child: Text(
                 "${repeatCount + 1} / ${azkarTexts[currentPage].repeat}",
-                style: const TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 22),
               ),
             ),
           ),

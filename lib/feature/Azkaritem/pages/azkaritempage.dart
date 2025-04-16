@@ -19,7 +19,7 @@ class AzkarHomePage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) =>  FavoriteAzkarPage()),
+                MaterialPageRoute(builder: (_) => FavoriteAzkarPage()),
               );
             },
           ),
@@ -53,7 +53,11 @@ class AzkarHomePage extends StatelessWidget {
                   tileColor: Theme.of(context).cardColor,
                   title: Text(
                     item.title,
-                    style: const TextStyle(fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                      fontFamily: 'me_quran',
+                    ),
                     textAlign: TextAlign.right,
                   ),
                   trailing: Icon(item.icon, color: Colors.greenAccent),
