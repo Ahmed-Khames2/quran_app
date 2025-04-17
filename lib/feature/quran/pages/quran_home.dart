@@ -20,14 +20,15 @@ class _QuranHomeState extends State<QuranHome> {
       appBar: AppBar(
         title: Text(
           "القرآن الكريم",
-          style: theme.textTheme.titleLarge?.copyWith(
+          style: TextStyle(
             fontSize: 26.sp, // استخدام screenutil لحجم الخط
             fontWeight: FontWeight.bold,
+            // fontFamily: 'me_quran',
             shadows: const [
               Shadow(
                 offset: Offset(1, 1),
                 blurRadius: 2.0,
-                color: Colors.black26,
+                color: Colors.black,
               ),
             ],
           ),

@@ -13,7 +13,7 @@ import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/mydrawerWid
 import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/prayer_icon.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/prayer_time_card.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/app_bae_widget.dart';
-import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/sallah_ala_mohamed.dart';
+// import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/sallah_ala_mohamed.dart';
 import 'package:theam_mood_with_block/feature/quran/pages/quran_home.dart';
 import 'package:theam_mood_with_block/feature/ziker/pages/homepage.dart';
 // import 'package:theam_mood_with_block/feature/prayer_time/ui/select_city_page.dart'; // استيراد صفحة اختيار المدينة
@@ -52,9 +52,9 @@ class PrayerTimeScreen extends StatelessWidget {
           return ListView(
             padding: EdgeInsets.all(16.0.w), // استخدام ScreenUtil
             children: [
-              SallahAlaMohamed(theme: theme),
-              SizedBox(height: 24.h), // استخدام ScreenUtil
-
+              // SallahAlaMohamed(theme: theme),
+              // SizedBox(height: 24.h), // استخدام ScreenUtil
+               // add here
               // عنوان مواقيت الصلاة
               Text(
                 'مواقيت الصلاة',

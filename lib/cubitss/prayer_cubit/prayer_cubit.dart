@@ -119,4 +119,28 @@ class PrayerCubit extends Cubit<PrayerState> {
     coordinates = Coordinates(newCity.lat, newCity.lng);
     _loadPrayerTimes(newCity);
   }
+// Get the current prayer that is ongoing or next
+  Prayer? _getCurrentPrayer(PrayerTimes prayerTimes) {
+    final now = DateTime.now();
+    if (now.isBefore(prayerTimes.fajr)) return Prayer.fajr;
+    if (now.isBefore(prayerTimes.dhuhr)) return Prayer.dhuhr;
+    if (now.isBefore(prayerTimes.asr)) return Prayer.asr;
+    if (now.isBefore(prayerTimes.maghrib)) return Prayer.maghrib;
+    if (now.isBefore(prayerTimes.isha)) return Prayer.isha;
+    return Prayer.fajr; // next day fajr
+  }
+
+  String _getRemainingTime(DateTime prayerTime) {
+    final now = DateTime.now();
+    final difference = prayerTime.difference(now);
+    final hours = difference.inHours;
+    final minutes = difference.inMinutes % 60;
+
+    if (hours > 0) {
+      return "$hours ساعة و $minutes دقيقة";
+    } else {
+      return "$minutes دقيقة";
+    }
+  }
+
 }

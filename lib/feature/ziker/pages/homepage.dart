@@ -17,17 +17,32 @@ class DhikrPage extends StatelessWidget {
       appBar: AppBar(
         title: Column(
           children: [
-            const Text("تسبيح"),
+            Text(
+              "تسبيح",
+              style: TextStyle(
+                fontSize: 26.sp, // استخدام screenutil لحجم الخط
+                fontWeight: FontWeight.bold,
+                // fontFamily: 'me_quran',
+                shadows: const [
+                  Shadow(
+                    offset: Offset(1, 1),
+                    blurRadius: 2.0,
+                    color: Colors.black,
+                  ),
+                ],
+              ),
+            ),
             BlocBuilder<TasbeehCubit, TasbeehState>(
               builder: (context, state) {
                 return Text(
                   'الجولة: ${state.rounds[state.currentIndex]}',
                   style: TextStyle(
-                    fontSize: 12.sp, // استخدام ScreenUtil للأبعاد
+                    fontSize: 14.sp, // استخدام ScreenUtil للأبعاد
                   ),
                 );
               },
             ),
+            SizedBox(height: 9.h),
           ],
         ),
         backgroundColor: theme.appBarTheme.backgroundColor,
@@ -63,11 +78,10 @@ class DhikrPage extends StatelessWidget {
                         child: Text(
                           state.azkar[index],
                           style: TextStyle(
-                            fontSize: 40.sp, // استخدام ScreenUtil للأبعاد
+                            fontSize: 38.sp, // استخدام ScreenUtil للأبعاد
                             fontFamily: 'me_quran',
-                            fontWeight: FontWeight.bold,
-                            color: theme
-                                .textTheme.bodyLarge?.color,
+                            fontWeight: FontWeight.w500,
+                            color: theme.textTheme.bodyLarge?.color,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -94,7 +108,9 @@ class DhikrPage extends StatelessWidget {
       bottomNavigationBar: BlocBuilder<TasbeehCubit, TasbeehState>(
         builder: (context, state) {
           return Padding(
-            padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 24.w), // استخدام ScreenUtil للمسافات
+            padding: EdgeInsets.symmetric(
+                vertical: 12.h,
+                horizontal: 24.w), // استخدام ScreenUtil للمسافات
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -124,11 +140,13 @@ class DhikrPage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: theme.appBarTheme.backgroundColor,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(60.r), // استخدام ScreenUtil للأبعاد
+                          borderRadius: BorderRadius.circular(
+                              60.r), // استخدام ScreenUtil للأبعاد
                         )),
                     child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h), // استخدام ScreenUtil للمسافات
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 24.w,
+                          vertical: 8.h), // استخدام ScreenUtil للمسافات
                       child: Text(
                         "تسبيح",
                         style: TextStyle(
@@ -171,7 +189,7 @@ class DhikrPage extends StatelessWidget {
       runSpacing: 8.h, // استخدام ScreenUtil للمسافات
       children: List.generate(repeatCount, (index) {
         return CircleAvatar(
-          radius: 10.r, // استخدام ScreenUtil للأبعاد
+          radius: 9.r, // استخدام ScreenUtil للأبعاد
           backgroundColor: index < currentCount
               ? theme.primaryColor
               // ignore: deprecated_member_use
@@ -200,6 +218,8 @@ class DhikrPage extends StatelessWidget {
                   'ضبط عدد التكرارات',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
+                        fontFamily: 'me_quran',
+                        fontSize: 20.sp,
                       ),
                 ),
                 IconButton(
@@ -214,23 +234,36 @@ class DhikrPage extends StatelessWidget {
               spacing: 12.w, // استخدام ScreenUtil للأبعاد
               runSpacing: 12.h, // استخدام ScreenUtil للمسافات
               children: [3, 33, 99, 100].map((e) {
-                return ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: theme.appBarTheme.backgroundColor,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 20.w, vertical: 12.h), // استخدام ScreenUtil للمسافات
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r), // استخدام ScreenUtil للأبعاد
+                return SizedBox(
+                  width: 160.w, // تحديد عرض ثابت لكل زر
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: theme.appBarTheme.backgroundColor,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.w,
+                          vertical: 12.h), // استخدام ScreenUtil للمسافات
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            12.r), // استخدام ScreenUtil للأبعاد
+                      ),
                     ),
+                    onPressed: () {
+                      context.read<TasbeehCubit>().changeRepeatCount(e);
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      '$e مرة',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontFamily: 'me_quran',
+                        color: Colors.white,
+                      ),
+                    ), // استخدام ScreenUtil للأبعاد
                   ),
-                  onPressed: () {
-                    context.read<TasbeehCubit>().changeRepeatCount(e);
-                    Navigator.pop(context);
-                  },
-                  child: Text('$e مرة', style: TextStyle(fontSize: 16.sp)), // استخدام ScreenUtil للأبعاد
                 );
               }).toList(),
             ),
+
             SizedBox(height: 16.h), // استخدام ScreenUtil للمسافات
           ],
         ),

@@ -55,17 +55,17 @@ class _AzkarDetailsPageState extends State<AzkarDetailsPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.r)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
         backgroundColor: theme.colorScheme.surface,
         title: Row(
           children: [
-            Icon(Icons.check_circle, color: theme.colorScheme.primary),
+            Icon(Icons.check_circle, color: theme.iconTheme.color),
             SizedBox(width: 8.w),
             Text(
               "تهانينا",
               style: theme.textTheme.titleLarge?.copyWith(
-                color: theme.colorScheme.primary,
+                color: theme.iconTheme.color,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'me_quran',
                 fontSize: 20.sp,
@@ -79,18 +79,18 @@ class _AzkarDetailsPageState extends State<AzkarDetailsPage> {
             // ignore: deprecated_member_use
             color: theme.colorScheme.onBackground,
             fontSize: 16.sp,
+            fontFamily: 'me_quran',
           ),
           textAlign: TextAlign.center,
         ),
         actionsAlignment: MainAxisAlignment.center,
         actions: [
           TextButton.icon(
-            icon: Icon(Icons.done,
-                color: theme.colorScheme.primary, size: 24.sp),
+            icon: Icon(Icons.done, color: theme.iconTheme.color, size: 24.sp),
             label: Text(
               "تم",
               style: theme.textTheme.labelLarge?.copyWith(
-                color: theme.colorScheme.primary,
+                color: theme.iconTheme.color,
                 fontWeight: FontWeight.bold,
                 fontSize: 18.sp,
               ),
@@ -115,12 +115,27 @@ class _AzkarDetailsPageState extends State<AzkarDetailsPage> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.item.title, style: TextStyle(fontSize: 18.sp)),
-            SizedBox(height: 4.h),
+            Text(
+              widget.item.title,
+              style: TextStyle(
+                fontSize: 22.sp, // استخدام screenutil لحجم الخط
+                fontWeight: FontWeight.bold,
+                // fontFamily: 'me_quran',
+                shadows: const [
+                  Shadow(
+                    offset: Offset(1, 1),
+                    blurRadius: 2.0,
+                    color: Colors.black,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 1.h),
             Text(
               "${currentPage + 1} / ${widget.item.azkarTexts.length}",
               style: TextStyle(fontSize: 14.sp, color: Colors.white70),
             ),
+            SizedBox(height: 2.h),
           ],
         ),
       ),
@@ -199,12 +214,11 @@ class _AzkarDetailsPageState extends State<AzkarDetailsPage> {
             child: ElevatedButton(
               onPressed: _nextZikr,
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(
-                    horizontal: 40.w, vertical: 16.h),
+                padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 16.h),
                 backgroundColor: theme.appBarTheme.backgroundColor,
               ),
               child: Text(
-                "${repeatCount + 1} / ${azkarTexts[currentPage].repeat}",
+                "$repeatCount / ${azkarTexts[currentPage].repeat}",
                 style: TextStyle(fontSize: 22.sp),
               ),
             ),

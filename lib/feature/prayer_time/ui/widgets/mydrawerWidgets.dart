@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:theam_mood_with_block/core/constant.dart';
-import 'package:theam_mood_with_block/pages/setting_page.dart';
+import 'package:theam_mood_with_block/feature/prayer_time/ui/pages/setting_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -28,27 +28,31 @@ class MyDrawer extends StatelessWidget {
                       radius: 35.r, // استخدم .r لجعل الحجم responsive
                       backgroundColor: Colors.white,
                       backgroundImage: const AssetImage(
-                        'assets/icon/ChatGPT_Image_Apr_15__2025__05_13_05_AM-removebg-preview.png'),
+                          'assets/icon/ChatGPT_Image_Apr_15__2025__05_13_05_AM-removebg-preview.png'),
                     ),
-                    SizedBox(width: 12.w), // استخدم .w لتحديد المسافة بين العناصر
+                    SizedBox(
+                        width: 12.w), // استخدم .w لتحديد المسافة بين العناصر
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Al-Quran App',
+                          ' Al-Quds App',
                           style: TextStyle(
-                            fontSize: 20.sp, // استخدم .sp لتحديد حجم الخط
+                            fontSize: 22.sp, // استخدم .sp لتحديد حجم الخط
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 4.h), // استخدم .h لتحديد المسافة الرأسية
+                        SizedBox(
+                            height: 4.h), // استخدم .h لتحديد المسافة الرأسية
                         Text(
                           'راحة لقلبك وطمأنينة لروحك',
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: Colors.white70,
+                            fontFamily: 'me_quran',
+                            // textBaseline: TextBaseline.alphabetic,
                           ),
                         ),
                       ],
@@ -61,7 +65,8 @@ class MyDrawer extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.topRight,
                     child: IconButton(
-                      icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+                      icon:
+                          const Icon(Icons.arrow_back_ios, color: Colors.white),
                       onPressed: () => Navigator.pop(context),
                     ),
                   ),
@@ -76,7 +81,14 @@ class MyDrawer extends StatelessWidget {
               children: [
                 ListTile(
                   leading: const Icon(Icons.settings),
-                  title: const Text('الإعدادات'),
+                  title: const Text(
+                    'الإعدادات',
+                    style: TextStyle(
+                      fontFamily: 'me_quran',
+                      fontSize: 18,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -90,7 +102,14 @@ class MyDrawer extends StatelessWidget {
                 const Divider(thickness: 1, height: 24),
                 ListTile(
                   leading: const Icon(Icons.share),
-                  title: const Text('مشاركة التطبيق'),
+                  title: const Text(
+                    'مشاركة التطبيق',
+                    style: TextStyle(
+                      fontFamily: 'me_quran',
+                      fontSize: 18,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   onTap: () {
                     // Share.share(
                     //   'جرب تطبيق القرآن الكريم 🌙\nhttps://github.com/Ahmed-Khames2',
@@ -99,7 +118,14 @@ class MyDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.rate_review),
-                  title: const Text('قيّم التطبيق'),
+                  title: const Text(
+                    'قيّم التطبيق',
+                    style: TextStyle(
+                      fontFamily: 'me_quran',
+                      fontSize: 18,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   onTap: () async {
                     if (!await launchUrl(
                       quranAppurl,
@@ -111,17 +137,30 @@ class MyDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.info_outline),
-                  title: const Text('عن التطبيق'),
+                  title: const Text(
+                    'عن التطبيق',
+                    style: TextStyle(
+                      fontFamily: 'me_quran',
+                      fontSize: 18,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   onTap: () {
                     showAboutDialog(
                       context: context,
-                      applicationName: "Al-Quran App",
+                      applicationName: "Al-Quds App",
                       applicationVersion: "1.0.0",
-                      applicationIcon:
-                          Image.asset('assets/icon/quran.png', height: 40.h), // استخدم .h لتحديد الارتفاع
+                      applicationIcon: Image.asset(
+                          'assets/icon/ChatGPT_Image_Apr_15__2025__05_13_05_AM-removebg-preview.png',
+                          height: 40.h), // استخدم .h لتحديد الارتفاع
                       children: const [
                         Text(
                           "تطبيق قرآن كريم بسيط وسهل الاستخدام، صمم خصيصًا ليكون رفيقك اليومي في التلاوة والتدبر.",
+                          style: TextStyle(
+                            fontFamily: 'me_quran',
+                            fontSize: 18,
+                            // fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     );
@@ -129,7 +168,14 @@ class MyDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.mail_outline),
-                  title: const Text('تواصل معنا'),
+                  title: const Text(
+                    'تواصل معنا',
+                    style: TextStyle(
+                      fontFamily: 'me_quran',
+                      fontSize: 18,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   onTap: () async {
                     final Uri emailLaunchUri = Uri(
                       scheme: 'mailto',
@@ -149,12 +195,14 @@ class MyDrawer extends StatelessWidget {
                 ),
                 const Divider(thickness: 1, height: 24),
                 Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h), // استخدم .w و .h لتحديد المسافة
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 12.w,
+                      vertical: 8.h), // استخدم .w و .h لتحديد المسافة
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.green.shade50,
-                      borderRadius: BorderRadius.circular(12.r), // استخدم .r لتحديد نصف القطر
+                      borderRadius: BorderRadius.circular(
+                          12.r), // استخدم .r لتحديد نصف القطر
                     ),
                     child: ListTile(
                       leading: const Icon(Icons.volunteer_activism,
@@ -166,6 +214,8 @@ class MyDrawer extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14.sp,
                           color: theme.primaryColor,
+                          fontFamily: 'me_quran',
+                          // height: 1.,
                         ),
                       ),
                     ),
@@ -177,17 +227,21 @@ class MyDrawer extends StatelessWidget {
 
           // 🔻 Footer
           Padding(
-            padding: EdgeInsets.only(bottom: 12.h), // استخدم .h لتحديد المسافة السفلية
+            padding: EdgeInsets.only(
+                bottom: 12.h), // استخدم .h لتحديد المسافة السفلية
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.code, size: 16.sp, color: Colors.grey.shade600), // استخدم .sp لتحديد الحجم
+                Icon(Icons.code,
+                    size: 16.sp,
+                    color: Colors.grey.shade600), // استخدم .sp لتحديد الحجم
                 SizedBox(width: 4.w), // استخدم .w لتحديد المسافة بين العناصر
                 Text(
                   'Developed by Ahmed Khames',
                   style: TextStyle(
                     color: Colors.grey.shade600,
                     fontSize: 12.sp, // استخدم .sp لتحديد الحجم
+
                   ),
                 ),
               ],

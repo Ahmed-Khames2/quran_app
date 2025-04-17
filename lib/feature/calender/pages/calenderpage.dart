@@ -76,11 +76,27 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor = theme.primaryColor;
-    final selectedColor = theme.elevatedButtonTheme.style?.backgroundColor?.resolve({}) ?? primaryColor;
+    final selectedColor =
+        theme.elevatedButtonTheme.style?.backgroundColor?.resolve({}) ??
+            primaryColor;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('التقويم والمناسبات الإسلامية'),
+        title: Text(
+          'التقويم والمناسبات الإسلامية',
+          style: TextStyle(
+            fontSize: 22.sp, // استخدام screenutil لحجم الخط
+            fontWeight: FontWeight.bold,
+            // fontFamily: 'me_quran',
+            shadows: const [
+              Shadow(
+                offset: Offset(1, 1),
+                blurRadius: 2.0,
+                color: Colors.black,
+              ),
+            ],
+          ),
+        ),
         centerTitle: true,
       ),
       body: LayoutBuilder(
@@ -125,7 +141,8 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
                           '${day.day}',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 18.sp,  // Use ScreenUtil for responsive text
+                            fontSize:
+                                18.sp, // Use ScreenUtil for responsive text
                             color: theme.textTheme.bodyLarge?.color,
                           ),
                         ),
@@ -133,7 +150,7 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
                         Text(
                           '${hijri.hDay}ه‍',
                           style: TextStyle(
-                            fontSize: 10.sp,  // Responsive text size
+                            fontSize: 10.sp, // Responsive text size
                             color: theme.textTheme.bodyMedium?.color,
                           ),
                         ),
@@ -155,7 +172,7 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
                             '${day.day}',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 18.sp,  // Responsive text size
+                              fontSize: 18.sp, // Responsive text size
                             ),
                           ),
                           Text(
@@ -184,7 +201,7 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
                             '${day.day}',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 18.sp,  // Responsive text size
+                              fontSize: 18.sp, // Responsive text size
                             ),
                           ),
                           Text(
@@ -201,11 +218,11 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
                   markerBuilder: (context, date, events) {
                     if (events.isNotEmpty) {
                       return Positioned(
-                        top: 8,
-                        right: 13,
+                        top: 4.h,
+                        right: 10.w,
                         child: Container(
-                          width: 6.w,  // Responsive width
-                          height: 6.h,  // Responsive height
+                          width: 6.w, // Responsive width
+                          height: 6.h, // Responsive height
                           decoration: BoxDecoration(
                             color: theme.colorScheme.secondary,
                             shape: BoxShape.circle,
@@ -220,15 +237,42 @@ class _IslamicCalendarPageState extends State<IslamicCalendarPage> {
               const SizedBox(height: 10),
               Expanded(
                 child: _getEventsForDay(_selectedDay!).isEmpty
-                    ? Center(child: Text('لا توجد مناسبات في هذا اليوم', style: TextStyle(fontSize: 14.sp)))
+                    ? Center(
+                        child: Text(
+                          'لا توجد مناسبات في هذا اليوم',
+                          style: TextStyle(
+                              fontSize: 20.sp,
+                              color: theme.textTheme.bodyLarge?.color,
+                              fontFamily: 'me_quran',
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )
                     : ListView.builder(
                         itemCount: _getEventsForDay(_selectedDay!).length,
                         itemBuilder: (context, index) {
-                          return ListTile(
-                            leading: Icon(Icons.event, color: primaryColor),
-                            title: Text(
-                              _getEventsForDay(_selectedDay!)[index],
-                              style: TextStyle(fontSize: 16.sp),  // Responsive font size
+                          return Card(
+                            elevation: 4,
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 8.h),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16.r),
+                            ),
+                            color:
+                                theme.cardColor, // استخدام لون الكارت من الثيم
+                            child: ListTile(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16.w, vertical: 12.h),
+                              leading:
+                                  Icon(Icons.event, color: theme.primaryColor),
+                              title: Text(
+                                _getEventsForDay(_selectedDay!)[index],
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontFamily: 'me_quran',
+                                  fontWeight: FontWeight.w500,
+                                  color: theme.textTheme.bodyLarge?.color,
+                                ),
+                              ),
                             ),
                           );
                         },

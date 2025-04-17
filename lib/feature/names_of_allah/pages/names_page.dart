@@ -47,11 +47,19 @@ class _NamesOfAllahPageState extends State<NamesOfAllahPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'أسماء الله الحسنى',
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 22.sp, // استخدام screenutil لحجم الخط
             fontWeight: FontWeight.bold,
+            // fontFamily: 'me_quran',
+            shadows: const [
+              Shadow(
+                offset: Offset(1, 1),
+                blurRadius: 2.0,
+                color: Colors.black,
+              ),
+            ],
           ),
         ),
         elevation: sqrt1_2,
@@ -64,50 +72,35 @@ class _NamesOfAllahPageState extends State<NamesOfAllahPage> {
             )
           : ListView.builder(
               itemCount: allahNames.length,
-              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h), // استخدام ScreenUtil هنا
+              padding: EdgeInsets.symmetric(
+                  horizontal: 12.w, vertical: 8.h), // استخدام ScreenUtil هنا
               itemBuilder: (context, index) {
                 final name = allahNames[index];
                 return Card(
                   elevation: 4,
-                  margin: EdgeInsets.symmetric(vertical: 8.h), // استخدام ScreenUtil هنا
+                  margin: EdgeInsets.symmetric(vertical: 8.h),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.r), // استخدام ScreenUtil هنا
+                    borderRadius: BorderRadius.circular(16.r),
                   ),
                   color: theme.cardColor,
                   child: Padding(
-                    padding: EdgeInsets.all(16.w), // استخدام ScreenUtil هنا
+                    padding: EdgeInsets.all(16.w),
                     child: Row(
+                      textDirection: TextDirection.rtl, // 👈 عكس الاتجاه
                       children: [
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 100.h, // استخدام ScreenUtil هنا
-                              child: Text(
-                                name.name,
-                                style: theme.textTheme.titleLarge?.copyWith(
-                                  fontSize: name.number == 85 ? 20.sp : 45.sp, // استخدام ScreenUtil هنا
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1.5,
-                                  fontFamily: 'quran_smart',
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(width: 16.w), // استخدام ScreenUtil هنا
                         Expanded(
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                            crossAxisAlignment:
+                                CrossAxisAlignment.start, // 👈 لتتماشى مع RTL
                             children: [
                               Container(
                                 padding: EdgeInsets.symmetric(
-                                    vertical: 8.h, horizontal: 12.w), // استخدام ScreenUtil هنا
+                                    vertical: 8.h, horizontal: 12.w),
                                 decoration: BoxDecoration(
                                   color: isDark
-                                      // ignore: deprecated_member_use
                                       ? theme.colorScheme.surfaceVariant
                                       : theme.colorScheme.surface,
-                                  borderRadius: BorderRadius.circular(12.r), // استخدام ScreenUtil هنا
+                                  borderRadius: BorderRadius.circular(12.r),
                                 ),
                                 child: Text(
                                   name.number.toString(),
@@ -116,31 +109,47 @@ class _NamesOfAllahPageState extends State<NamesOfAllahPage> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 12.h), // استخدام ScreenUtil هنا
+                              SizedBox(height: 12.h),
                               Text(
                                 name.name,
                                 style: theme.textTheme.titleLarge?.copyWith(
-                                  fontSize: name.number == 85 ? 25.sp : 30.sp, // استخدام ScreenUtil هنا
+                                  fontSize: name.number == 85 ? 25.sp : 30.sp,
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 1.5,
                                   fontFamily: 'me_quran',
                                 ),
                               ),
-                              SizedBox(height: 4.h), // استخدام ScreenUtil هنا
+                              SizedBox(height: 4.h),
                               Text(
                                 name.description,
                                 style: theme.textTheme.bodyLarge?.copyWith(
-                                  fontSize: 16.sp, // استخدام ScreenUtil هنا
+                                  fontSize: 16.sp,
+                                  fontFamily: 'me_quran',
                                   color: theme.textTheme.bodyLarge?.color
-                                      // ignore: deprecated_member_use
                                       ?.withOpacity(0.7),
                                 ),
                                 textAlign: TextAlign.right,
-                                // ignore: deprecated_member_use
                                 textScaleFactor: 1.2,
                               ),
                             ],
                           ),
+                        ),
+                        SizedBox(width: 16.w),
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: 100.h,
+                              child: Text(
+                                name.name,
+                                style: theme.textTheme.titleLarge?.copyWith(
+                                  fontSize: name.number == 85 ? 20.sp : 45.sp,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.5,
+                                  fontFamily: 'quran_smart',
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

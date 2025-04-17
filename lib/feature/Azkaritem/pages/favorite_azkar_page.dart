@@ -43,7 +43,18 @@ class _FavoriteAzkarPageState extends State<FavoriteAzkarPage> {
       appBar: AppBar(
         title: Text(
           "الأذكار المفضلة",
-          style: TextStyle(fontSize: 20.sp),
+          style: TextStyle(
+            fontSize: 22.sp, // استخدام screenutil لحجم الخط
+            fontWeight: FontWeight.bold,
+            // fontFamily: 'me_quran',
+            shadows: const [
+              Shadow(
+                offset: Offset(1, 1),
+                blurRadius: 2.0,
+                color: Colors.black,
+              ),
+            ],
+          ),
         ),
       ),
       body: BlocBuilder<FavoriteCubit, FavoriteState>(
@@ -54,7 +65,11 @@ class _FavoriteAzkarPageState extends State<FavoriteAzkarPage> {
             return Center(
               child: Text(
                 "لا يوجد أذكار مفضلة بعد",
-                style: TextStyle(color: textColor, fontSize: 18.sp),
+                style: TextStyle(
+                    color: textColor,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'me_quran'),
               ),
             );
           }
@@ -73,7 +88,8 @@ class _FavoriteAzkarPageState extends State<FavoriteAzkarPage> {
                   itemBuilder: (context, index) {
                     final text = favorites[index];
                     return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.w, vertical: 20.h),
                       child: Card(
                         color: theme.cardColor,
                         shape: RoundedRectangleBorder(
@@ -85,10 +101,11 @@ class _FavoriteAzkarPageState extends State<FavoriteAzkarPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                             const  Row(
+                              const Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                   Icon(Icons.favorite, color: Colors.red, size: 30),
+                                  Icon(Icons.favorite,
+                                      color: Colors.red, size: 30),
                                 ],
                               ),
                               SizedBox(height: 20.h),
@@ -97,10 +114,10 @@ class _FavoriteAzkarPageState extends State<FavoriteAzkarPage> {
                                   child: Text(
                                     text,
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: textColor,
+                                    style: theme.textTheme.bodyLarge!.copyWith(
                                       fontSize: 22.sp,
-                                      height: 1.6,
+                                      height: 2.1,
+                                      fontFamily: 'me_quran',
                                     ),
                                   ),
                                 ),
@@ -108,19 +125,32 @@ class _FavoriteAzkarPageState extends State<FavoriteAzkarPage> {
                               SizedBox(height: 20.h),
                               ElevatedButton.icon(
                                 onPressed: () {
-                                  context.read<FavoriteCubit>().toggleFavorite(text);
-                                  if (currentIndex >= state.favorites.length - 1) {
+                                  context
+                                      .read<FavoriteCubit>()
+                                      .toggleFavorite(text);
+                                  if (currentIndex >=
+                                      state.favorites.length - 1) {
                                     setState(() {
-                                      currentIndex = state.favorites.length - 2 < 0 ? 0 : state.favorites.length - 2;
+                                      currentIndex =
+                                          state.favorites.length - 2 < 0
+                                              ? 0
+                                              : state.favorites.length - 2;
                                     });
                                   }
                                 },
                                 icon: const Icon(Icons.delete),
-                                label: const Text("إزالة من المفضلة"),
+                                label: Text(
+                                  "إزالة من المفضلة",
+                                  style: TextStyle(
+                                    fontSize: 18.sp,
+                                    fontFamily: 'me_quran',
+                                  ),
+                                ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.red,
                                   foregroundColor: Colors.white,
-                                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20.w, vertical: 12.h),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12.r),
                                   ),
@@ -140,7 +170,8 @@ class _FavoriteAzkarPageState extends State<FavoriteAzkarPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
-                      icon: Icon(Icons.arrow_back_ios, color: textColor, size: 24.sp),
+                      icon: Icon(Icons.arrow_back_ios,
+                          color: textColor, size: 24.sp),
                       onPressed: () => _goToPage(currentIndex - 1),
                     ),
                     Text(
@@ -148,7 +179,8 @@ class _FavoriteAzkarPageState extends State<FavoriteAzkarPage> {
                       style: TextStyle(color: textColor, fontSize: 16.sp),
                     ),
                     IconButton(
-                      icon: Icon(Icons.arrow_forward_ios, color: textColor, size: 24.sp),
+                      icon: Icon(Icons.arrow_forward_ios,
+                          color: textColor, size: 24.sp),
                       onPressed: () => _goToPage(currentIndex + 1),
                     ),
                   ],

@@ -20,8 +20,17 @@ class _SettingsState extends State<Settings> {
       appBar: AppBar(
         title: Text(
           "الإعدادات",
-          style: theme.textTheme.titleLarge?.copyWith(
-            fontSize: 24.sp, // استخدام screenutil لحجم الخط
+          style: TextStyle(
+            fontSize: 26.sp, // استخدام screenutil لحجم الخط
+            fontWeight: FontWeight.bold,
+            // fontFamily: 'me_quran',
+            shadows: const [
+              Shadow(
+                offset: Offset(1, 1),
+                blurRadius: 2.0,
+                color: Colors.black,
+              ),
+            ],
           ),
         ),
         backgroundColor: theme.primaryColor,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 /// تعداد الثيمات المتاحة في التطبيق مع أسماء وصفية.
 enum AppTheme {
-  islamicLight("Islamic Light"),
-  islamicDark("Islamic Dark");
+  islamicLight("الوضع الفاتح "),
+  islamicDark("الوضع المظلم");
 
   const AppTheme(this.name);
   final String name;

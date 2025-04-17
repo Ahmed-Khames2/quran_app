@@ -13,7 +13,18 @@ class AzkarHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "الأذكار",
-          style: TextStyle(fontSize: 20.sp),
+          style: TextStyle(
+            fontSize: 26.sp, // استخدام screenutil لحجم الخط
+            fontWeight: FontWeight.bold,
+            // fontFamily: 'me_quran',
+            shadows: const [
+              Shadow(
+                offset: Offset(1, 1),
+                blurRadius: 2.0,
+                color: Colors.black,
+              ),
+            ],
+          ),
         ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         actions: [
@@ -71,7 +82,8 @@ class AzkarHomePage extends StatelessWidget {
                       ),
                       textAlign: TextAlign.right,
                     ),
-                    trailing: Icon(item.icon, color: Colors.greenAccent, size: 24.sp),
+                    trailing:
+                        Icon(item.icon, color: Colors.greenAccent, size: 24.sp),
                     onTap: () {
                       Navigator.push(
                         context,

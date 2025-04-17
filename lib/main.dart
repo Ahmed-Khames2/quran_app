@@ -9,7 +9,8 @@ import 'package:theam_mood_with_block/cubitss/tasbeeh_cubit/tasbeeh_cubit.dart';
 import 'package:theam_mood_with_block/core/theme/app_theme.dart';
 // import 'package:theam_mood_with_block/feature/prayer_time/ui/pages/home_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:theam_mood_with_block/test.dart';
+import 'package:theam_mood_with_block/feature/Azkaritem/pages/azkaritempage.dart';
+import 'package:theam_mood_with_block/splashScreen.dart';
 // ignore: library_prefixes
 import 'package:timezone/data/latest.dart' as tzData;
 import 'package:timezone/timezone.dart' as tz;
@@ -77,7 +78,7 @@ class MyApp extends StatelessWidget {
                     GlobalCupertinoLocalizations.delegate,
                   ],
                   theme: appThemeData[state.appTheme]!,
-                  home: const SplashScreen(),
+                  home: const AzkarHomePage(),
                 );
               } else {
                 return const SizedBox();

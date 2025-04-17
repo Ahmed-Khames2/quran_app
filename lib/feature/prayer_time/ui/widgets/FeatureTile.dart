@@ -55,7 +55,8 @@ class _FeatureTileState extends State<FeatureTile> {
             AnimatedContainer(
               duration: const Duration(milliseconds: 500),
               curve: Curves.easeOut,
-              padding: EdgeInsets.all(_glow ? 6.r : 0), // استخدام ScreenUtil للأبعاد
+              padding:
+                  EdgeInsets.all(_glow ? 6.r : 0), // استخدام ScreenUtil للأبعاد
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 boxShadow: _glow
@@ -82,7 +83,7 @@ class _FeatureTileState extends State<FeatureTile> {
             SizedBox(height: 8.h), // استخدام ScreenUtil للأبعاد
             SizedBox(
               width: 80.w, // استخدام ScreenUtil للأبعاد
-              height: 20.h, // استخدام ScreenUtil للأبعاد
+              height: 22.h, // استخدام ScreenUtil للأبعاد
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   final textStyle = TextStyle(

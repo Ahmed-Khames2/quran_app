@@ -2,13 +2,14 @@
 
 // import 'package:change_notifier_provider_and_consumer/features/Azkaritem/models/zkermodel.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:theam_mood_with_block/feature/Azkaritem/models/zkermodel.dart';
 // import 'zkermodel.dart'; // تأكد إنك بتستورد الموديل الخاص بالأذكار.
 
 final List<AzkarItem> azkarList = [
   AzkarItem(
     title: "أذكار الصباح",
-    icon: Icons.wb_cloudy,
+    icon: FontAwesomeIcons.sun,
     azkarTexts: [
       ZekrModel(text: '''سُورَةُ الإِخْلَاصِ
 بِسْمِ ٱللهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
@@ -132,7 +133,7 @@ final List<AzkarItem> azkarList = [
   ),
   AzkarItem(
     title: "أذكار المساء",
-    icon: Icons.nightlight_round,
+    icon: FontAwesomeIcons.moon,
     azkarTexts: [
       ZekrModel(text: ''' سُورَةُ الإِخْلَاصِ
 بِسْمِ ٱللهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
@@ -254,7 +255,7 @@ final List<AzkarItem> azkarList = [
           repeat: 3),
     ],
   ),
-  AzkarItem(title: "أذكار قبل النوم", icon: Icons.bed, azkarTexts: [
+  AzkarItem(title: "أذكار قبل النوم", icon: FontAwesomeIcons.bed, azkarTexts: [
     ZekrModel(text: ''' سُورَةُ الإِخْلَاصِ 
 بِسْمِ ٱللهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ 
 قُلْ هُوَ ٱللهُ أَحَدٌ * ٱللهُ ٱلصَّمَدُ * لَمْ يَلِدْ وَلَمْ يُولَدْ * وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌ * 
@@ -331,7 +332,7 @@ final List<AzkarItem> azkarList = [
   ]),
   AzkarItem(
     title: 'أذكار الاستيقاظ من النوم',
-    icon: Icons.wb_sunny,
+    icon: FontAwesomeIcons.sun,
     azkarTexts: [
       ZekrModel(
           text:
@@ -575,7 +576,7 @@ final List<AzkarItem> azkarList = [
   ),
   AzkarItem(
     title: 'عند دخول المسجد',
-    icon: Icons.login,
+    icon: FontAwesomeIcons.doorOpen,
     azkarTexts: [
       ZekrModel(
           text:
@@ -587,7 +588,7 @@ final List<AzkarItem> azkarList = [
   ),
   AzkarItem(
     title: 'عند الخروج من المسجد',
-    icon: Icons.logout,
+    icon: FontAwesomeIcons.arrowRightFromBracket,
     azkarTexts: [
       ZekrModel(
           text:
@@ -727,7 +728,7 @@ final List<AzkarItem> azkarList = [
   ),
   AzkarItem(
     title: 'دعاء لبس الثوب',
-    icon: Icons.checkroom,
+    icon: FontAwesomeIcons.socks,
     azkarTexts: [
       ZekrModel(
           text:
@@ -739,7 +740,7 @@ final List<AzkarItem> azkarList = [
   ),
   AzkarItem(
     title: 'دعاء وضع الثوب',
-    icon: Icons.local_laundry_service,
+    icon: FontAwesomeIcons.shirt,
     azkarTexts: [
       ZekrModel(text: '''بِسْمِ اللَّهِ.
 
@@ -748,7 +749,7 @@ final List<AzkarItem> azkarList = [
   ),
   AzkarItem(
     title: 'دعاء دخول الخلاء',
-    icon: Icons.wc,
+    icon: FontAwesomeIcons.toilet,
     azkarTexts: [
       ZekrModel(
           text: ''' اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبْثِ وَالْخَبائِث
@@ -758,7 +759,7 @@ final List<AzkarItem> azkarList = [
   ),
   AzkarItem(
     title: 'دعاء الخروج من الخلاء',
-    icon: Icons.soap,
+    icon: FontAwesomeIcons.bath,
     azkarTexts: [
       ZekrModel(text: '''غُفْرَانَكَ
 
