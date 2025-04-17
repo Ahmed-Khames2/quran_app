@@ -107,4 +107,16 @@ class PrayerCubit extends Cubit<PrayerState> {
     coordinates = Coordinates(city.lat, city.lng);
     _loadPrayerTimes(city);
   }
+
+  // Add updateCity method to update city and prayer times
+  void updateCity(CityModel newCity) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedCity', newCity.name);
+    await prefs.setDouble('cityLat', newCity.lat);
+    await prefs.setDouble('cityLng', newCity.lng);
+
+    // After updating city in shared preferences, update prayer times
+    coordinates = Coordinates(newCity.lat, newCity.lng);
+    _loadPrayerTimes(newCity);
+  }
 }

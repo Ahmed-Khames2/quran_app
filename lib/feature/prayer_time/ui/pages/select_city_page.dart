@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/models/city_model.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/services/city_service.dart';
+
 class SelectCityPage extends StatefulWidget {
   const SelectCityPage({super.key});
 
@@ -82,37 +83,30 @@ class _SelectCityPageState extends State<SelectCityPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "اختر المدينة",
+          'اختيار المدينة',
           style: theme.textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.bold,
-            fontSize: 20.sp, // استخدام ScreenUtil لتحديد حجم الخط
+            fontFamily: 'me_quran',
+            fontSize: 24.sp, // استخدام ScreenUtil
           ),
         ),
       ),
       body: isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-                color: theme.colorScheme.primary,
-              ),
-            )
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
+              padding: EdgeInsets.all(16.0.w), // استخدام ScreenUtil
               itemCount: cities.length,
               itemBuilder: (context, index) {
                 final city = cities[index];
-                return Card(
-                  margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w), // استخدام ScreenUtil للأبعاد
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r), // استخدام ScreenUtil للتدوير
-                  ),
-                  child: ListTile(
-                    title: Text(
-                      city.name,
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        fontSize: 16.sp, // استخدام ScreenUtil لتحديد حجم الخط
-                      ),
+
+                return ListTile(
+                  title: Text(
+                    city.name,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      fontSize: 18.sp, // استخدام ScreenUtil
                     ),
-                    onTap: () => _showConfirmDialog(city),
                   ),
+                  onTap: () => _showConfirmDialog(city),
                 );
               },
             ),

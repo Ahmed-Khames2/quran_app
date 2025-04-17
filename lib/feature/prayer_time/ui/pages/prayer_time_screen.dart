@@ -6,6 +6,7 @@ import 'package:theam_mood_with_block/cubitss/prayer_cubit/prayer_stare.dart';
 import 'package:theam_mood_with_block/feature/Azkaritem/pages/azkaritempage.dart';
 import 'package:theam_mood_with_block/feature/calender/pages/calenderpage.dart';
 import 'package:theam_mood_with_block/feature/names_of_allah/pages/names_page.dart';
+import 'package:theam_mood_with_block/feature/prayer_time/ui/pages/select_city_page.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/FeatureTile.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/QuranCard.dart';
 import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/mydrawerWidgets.dart';
@@ -15,6 +16,7 @@ import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/app_bae_wid
 import 'package:theam_mood_with_block/feature/prayer_time/ui/widgets/sallah_ala_mohamed.dart';
 import 'package:theam_mood_with_block/feature/quran/pages/quran_home.dart';
 import 'package:theam_mood_with_block/feature/ziker/pages/homepage.dart';
+// import 'package:theam_mood_with_block/feature/prayer_time/ui/select_city_page.dart'; // استيراد صفحة اختيار المدينة
 
 class PrayerTimeScreen extends StatelessWidget {
   const PrayerTimeScreen({super.key});
@@ -28,8 +30,15 @@ class PrayerTimeScreen extends StatelessWidget {
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: AppBarWidget(
           cityName: context.watch<PrayerCubit>().state.selectedCity?.name ?? '',
-          onSelectCity: () {
-            // فتح صفحة اختيار المدينة
+          onSelectCity: () async {
+            final selectedCity = await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const SelectCityPage()),
+            );
+
+            if (selectedCity != null) {
+              context.read<PrayerCubit>().updateCity(selectedCity);
+            }
           },
         ),
       ),
